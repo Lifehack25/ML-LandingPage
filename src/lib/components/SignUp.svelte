@@ -1,32 +1,51 @@
 <script lang="ts">
 	let email = $state('');
 	let reservationEmail = $state('');
+	import stripeLogo from '$lib/assets/stripe.webp';
 </script>
 
-<section id="signup" class="py-24 px-4 md:px-8 max-w-7xl mx-auto">
-	<div class="text-center mb-16 space-y-4">
-		<h2 class="text-4xl md:text-5xl font-bold text-gray-900 font-serif">Join the Waitlist</h2>
-		<p class="text-xl text-gray-600 font-light">Be the first to lock your memories.</p>
+<section id="signup" class="relative py-24 px-4 md:px-8 max-w-7xl mx-auto overflow-hidden">
+	<!-- Background Decoration -->
+	<div
+		class="absolute inset-0 bg-gradient-to-b from-transparent via-brand-50/20 to-transparent pointer-events-none"
+	></div>
+
+	<div class="relative z-10 text-center mb-12 px-4">
+		<div class="inline-block animate-fade-in-up">
+			<span
+				class="inline-flex items-center px-4 py-2 rounded-full bg-brand-100 border border-brand-200 text-brand-600 text-xs md:text-sm font-bold uppercase tracking-widest shadow-sm mb-4"
+			>
+				Memory Locks will launch on Kickstarter at just&nbsp;<span class="text-brand-500"
+					>€19.95</span
+				>
+			</span>
+		</div>
+		<h2
+			class="text-4xl md:text-5xl font-bold text-gray-900 font-serif mb-4 animate-fade-in-up"
+			style="animation-delay: 0.1s;"
+		>
+			Join the Waitlist
+		</h2>
+		<p class="text-xl text-gray-600 font-light animate-fade-in-up" style="animation-delay: 0.2s;">
+			Be among the first to share their story.
+		</p>
 	</div>
 
-	<div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+	<div class="relative z-10 grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
 		<!-- Free Tier -->
 		<div
-			class="bg-white p-8 md:p-10 rounded-[2rem] border border-gray-100 shadow-xl hover:shadow-2xl transition-all flex flex-col"
+			class="bg-white p-8 md:p-10 rounded-[2rem] border border-gray-100 shadow-xl hover:shadow-2xl transition-all flex flex-col animate-fade-in-up"
+			style="animation-delay: 0.3s;"
 		>
 			<div class="mb-8">
-				<h3 class="text-2xl font-bold text-gray-900 font-serif">Free Access</h3>
-				<p class="text-brand-500 font-medium mt-2">Get notified when we launch</p>
+				<h3 class="text-2xl font-bold text-gray-900 font-serif">Get notified when we launch</h3>
 			</div>
 			<ul class="space-y-4 mb-8 text-gray-600 flex-grow">
 				<li class="flex items-center gap-3">
-					<span class="text-green-500 bg-green-50 rounded-full p-1">✓</span> Launch notification
+					<span class="text-green-500 bg-green-50 rounded-full p-1">✓</span> Launch Notification
 				</li>
 				<li class="flex items-center gap-3">
-					<span class="text-green-500 bg-green-50 rounded-full p-1">✓</span> Monthly newsletter
-				</li>
-				<li class="flex items-center gap-3 opacity-50">
-					<span class="text-gray-300 bg-gray-50 rounded-full p-1">×</span> Early bird discount
+					<span class="text-green-500 bg-green-50 rounded-full p-1">✓</span> 30% Discount on Launch
 				</li>
 			</ul>
 			<form class="space-y-4" onsubmit={(e) => e.preventDefault()}>
@@ -46,12 +65,13 @@
 
 		<!-- Reservation Tier -->
 		<div
-			class="bg-gradient-to-br from-white via-brand-50/30 to-white p-8 md:p-10 rounded-[2rem] border-2 border-brand-200 shadow-2xl shadow-brand-100/50 relative overflow-hidden group transform hover:-translate-y-1 transition-all duration-300"
+			class="bg-gradient-to-br from-white via-brand-50/30 to-white p-8 md:p-10 rounded-[2rem] border-2 border-brand-200 shadow-2xl shadow-brand-100/50 relative overflow-hidden group transform hover:-translate-y-1 transition-all duration-300 animate-fade-in-up"
+			style="animation-delay: 0.4s;"
 		>
 			<div
-				class="absolute top-0 right-0 bg-brand-500 text-white text-xs font-bold px-4 py-2 rounded-bl-2xl shadow-md"
+				class="absolute top-0 right-0 bg-brand-500 text-white text-xs font-bold px-4 py-2 rounded-bl-2xl shadow-md z-10"
 			>
-				RECOMMENDED
+				MOST VALUE
 			</div>
 			<!-- Shimmer effect -->
 			<div
@@ -68,15 +88,15 @@
 			<ul class="space-y-4 mb-8 text-gray-700 relative">
 				<li class="flex items-center gap-3">
 					<span class="bg-brand-100 text-brand-600 rounded-full p-1 text-xs">✓</span>
-					<span class="font-semibold">40% Discount</span> on launch
+					<span><span class="font-semibold">50% Discount</span> on Launch</span>
 				</li>
 				<li class="flex items-center gap-3">
 					<span class="bg-brand-100 text-brand-600 rounded-full p-1 text-xs">✓</span>
-					Priority Early Access
+					Exclusive Early Access
 				</li>
 				<li class="flex items-center gap-3">
 					<span class="bg-brand-100 text-brand-600 rounded-full p-1 text-xs">✓</span>
-					Exclusive Founder's Badge
+					Launch Notification
 				</li>
 			</ul>
 			<form class="space-y-4 relative" onsubmit={(e) => e.preventDefault()}>
@@ -92,8 +112,10 @@
 					Reserve for €1
 				</button>
 			</form>
-			<p class="text-xs text-center text-gray-400 mt-6 relative">
-				Fully refundable deposit. Secure payment via Stripe.
+			<p
+				class="text-sm text-center text-gray-400 mt-6 relative flex items-center justify-center gap-1"
+			>
+				Secure payment with<img src={stripeLogo} alt="Stripe" class="h-4 opacity-60 grayscale" />
 			</p>
 		</div>
 	</div>

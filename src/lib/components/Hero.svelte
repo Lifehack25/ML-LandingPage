@@ -1,10 +1,28 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { fade } from 'svelte/transition';
+	import { fade, fly } from 'svelte/transition';
 	import heroImage from '$lib/assets/hero-image.png';
-	import backgroundImage from '$lib/assets/background.png';
+	import backgroundImage from '$lib/assets/background1.jpg';
+	import CreativeButton from '$lib/components/ui/CreativeButton.svelte';
 
 	let showSurprise = false;
+
+	async function triggerSurprise(event: MouseEvent) {
+		const target = event.currentTarget as HTMLElement;
+		const rect = target.getBoundingClientRect();
+		const x = (rect.left + rect.width / 2) / window.innerWidth;
+		const y = (rect.top + rect.height / 2) / window.innerHeight;
+
+		// Dynamically import confetti to avoid SSR issues
+		const confetti = (await import('canvas-confetti')).default;
+
+		showSurprise = true;
+		confetti({
+			particleCount: 100,
+			spread: 70,
+			origin: { x, y }
+		});
+	}
 </script>
 
 <section class="relative overflow-hidden py-16 md:py-32 isolate">
@@ -46,23 +64,26 @@
 						placeholder="Enter your email address"
 						class="flex-1 px-6 py-4 rounded-full bg-white border border-gray-200 shadow-md focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all font-light text-gray-600 placeholder:text-gray-500"
 					/>
-					<button
+					<CreativeButton
 						type="submit"
-						class="bg-brand-500 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 hover:bg-brand-600 whitespace-nowrap"
+						className="px-8 py-4 text-lg font-semibold shadow-xl hover:shadow-2xl hover:shadow-brand-500/30 whitespace-nowrap"
 					>
 						Join Waitlist
-					</button>
+					</CreativeButton>
 				</form>
 
 				<div class="mt-4 h-6">
 					{#if showSurprise}
-						<p in:fade class="text-sm text-brand-600 font-medium italic">
-							A special surprise awaits our earliest customers!
+						<p
+							in:fly={{ y: 20, duration: 800 }}
+							class="text-base text-brand-600 font-medium italic"
+						>
+							A special surprise awaits our earliest customers! 🎉
 						</p>
 					{:else}
 						<button
-							on:click={() => (showSurprise = true)}
-							class="text-sm text-gray-400 hover:text-brand-500 transition-colors cursor-pointer italic"
+							on:click={triggerSurprise}
+							class="text-sm text-gray-600 hover:text-brand-500 transition-colors cursor-pointer italic"
 						>
 							Psst...
 						</button>
@@ -73,11 +94,7 @@
 				<div
 					class="absolute inset-0 bg-brand-300 rounded-full blur-[100px] opacity-20 -z-10 transform translate-x-10 translate-y-10"
 				></div>
-				<img
-					src={heroImage}
-					alt="Memory Lock Product"
-					class="w-full h-auto drop-shadow-2xl transform hover:scale-[1.02] transition-transform duration-500"
-				/>
+				<img src={heroImage} alt="Memory Lock Product" class="w-full h-auto drop-shadow-2xl" />
 			</div>
 		</div>
 	</div>

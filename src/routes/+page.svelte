@@ -3,6 +3,7 @@
 	import Hero from '$lib/components/Hero.svelte';
 	import About from '$lib/components/About.svelte';
 	import HowItWorks from '$lib/components/HowItWorks.svelte';
+	import SectionDivider from '$lib/components/SectionDivider.svelte';
 	import MapFeature from '$lib/components/MapFeature.svelte';
 	import SignUp from '$lib/components/SignUp.svelte';
 	import Footer from '$lib/components/Footer.svelte';
@@ -15,6 +16,7 @@
 	<main>
 		<Hero />
 		<HowItWorks />
+		<SectionDivider />
 		<About />
 		<MapFeature />
 		<SignUp />

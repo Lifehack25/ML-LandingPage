@@ -86,7 +86,7 @@
 					<img
 						src={doneIcon}
 						alt="Seal"
-						class="w-16 h-16 object-contain mb-6 opacity-90 group-hover:scale-110 transition-transform duration-500"
+						class="w-12 h-12 object-contain mb-6 opacity-90 group-hover:scale-110 transition-transform duration-500"
 					/>
 					<h3 class="text-xl font-serif text-gray-900 mb-3">3. Publish</h3>
 					<p class="text-gray-600 font-light leading-relaxed">
