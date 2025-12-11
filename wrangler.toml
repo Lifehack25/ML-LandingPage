@@ -6,3 +6,7 @@ compatibility_flags = ["nodejs_compat"]
 # Optional observability
 [observability]
 enabled = true
+
+[assets]
+directory = ".svelte-kit/cloudflare"
+binding = "ASSETS"
