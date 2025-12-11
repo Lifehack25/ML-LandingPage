@@ -55,7 +55,7 @@
 					/>
 					<h3 class="text-xl font-serif text-gray-900 mb-3">1. Connect</h3>
 					<p class="text-gray-600 font-light leading-relaxed">
-						Download the app and connect the lock to your account.
+						Download the app, create an account and connect the lock.
 					</p>
 				</div>
 			</div>
@@ -72,7 +72,7 @@
 					/>
 					<h3 class="text-xl font-serif text-gray-900 mb-3">2. Upload</h3>
 					<p class="text-gray-600 font-light leading-relaxed">
-						Choose your most cherished moments and upload them.
+						Find your most cherished moments and upload them.
 					</p>
 					<p class="text-sm text-gray-400 mt-auto pt-2">Both images and videos work.</p>
 				</div>

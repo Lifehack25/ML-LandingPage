@@ -2,6 +2,76 @@
 	let email = $state('');
 	let reservationEmail = $state('');
 	import stripeLogo from '$lib/assets/stripe.webp';
+
+	// State for standard signup
+	let isStandardLoading = $state(false);
+	let standardSuccess = $state(false);
+	let standardError = $state('');
+
+	// State for reservation signup
+	let isReservationLoading = $state(false);
+	let reservationError = $state('');
+
+	async function handleStandardSignup() {
+		if (!email) return;
+
+		isStandardLoading = true;
+		standardError = '';
+		standardSuccess = false;
+
+		try {
+			const response = await fetch('/api/signup', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ email, type: 'standard' })
+			});
+
+			const data = await response.json();
+
+			if (response.ok) {
+				standardSuccess = true;
+				email = ''; // Clear input
+			} else {
+				standardError = data.message || 'Something went wrong. Please try again.';
+			}
+		} catch (e) {
+			standardError = 'Failed to connect. Please check your internet connection.';
+		} finally {
+			isStandardLoading = false;
+		}
+	}
+
+	async function handleReservationSignup() {
+		if (!reservationEmail) return;
+
+		isReservationLoading = true;
+		reservationError = '';
+
+		try {
+			const response = await fetch('/api/signup', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ email: reservationEmail, type: 'reservation' })
+			});
+
+			const data = await response.json();
+
+			if (response.ok && data.url) {
+				// Redirect to Stripe Checkout
+				window.location.href = data.url;
+			} else {
+				reservationError = data.message || 'Something went wrong. Please try again.';
+			}
+		} catch (e) {
+			reservationError = 'Failed to connect. Please check your internet connection.';
+		} finally {
+			// Don't turn off loading if redirecting, to prevent flashing
+			// But do turn it off if there was an error
+			if (reservationError) {
+				isReservationLoading = false;
+			}
+		}
+	}
 </script>
 
 <section id="signup" class="relative py-24 px-4 md:px-8 max-w-7xl mx-auto overflow-hidden">
@@ -11,15 +81,6 @@
 	></div>
 
 	<div class="relative z-10 text-center mb-12 px-4">
-		<div class="inline-block animate-fade-in-up">
-			<span
-				class="inline-flex items-center px-4 py-2 rounded-full bg-brand-100 border border-brand-200 text-brand-600 text-xs md:text-sm font-bold uppercase tracking-widest shadow-sm mb-4"
-			>
-				Memory Locks will launch on Kickstarter at just&nbsp;<span class="text-brand-500"
-					>€19.95</span
-				>
-			</span>
-		</div>
 		<h2
 			class="text-4xl md:text-5xl font-bold text-gray-900 font-serif mb-4 animate-fade-in-up"
 			style="animation-delay: 0.1s;"
@@ -48,23 +109,71 @@
 					<span class="text-green-500 bg-green-50 rounded-full p-1">✓</span> 30% Discount on Launch
 				</li>
 			</ul>
-			<form class="space-y-4" onsubmit={(e) => e.preventDefault()}>
-				<input
-					type="email"
-					bind:value={email}
-					placeholder="Enter your email"
-					class="w-full px-6 py-4 rounded-xl border border-gray-200 focus:border-brand-500 focus:ring-4 focus:ring-brand-100 outline-none transition-all bg-gray-50 focus:bg-white"
-				/>
-				<button
-					class="w-full bg-gray-900 text-white font-semibold py-4 rounded-xl hover:bg-gray-800 transition-colors shadow-lg hover:shadow-xl"
-				>
-					Join Waitlist
-				</button>
+
+			<form
+				class="space-y-4"
+				onsubmit={(e) => {
+					e.preventDefault();
+					handleStandardSignup();
+				}}
+			>
+				{#if standardSuccess}
+					<div
+						class="bg-green-50 text-green-700 p-4 rounded-xl text-center border border-green-100"
+					>
+						<p class="font-semibold">You're on the list!</p>
+						<p class="text-sm">Keep an eye on your inbox.</p>
+					</div>
+				{:else}
+					<input
+						type="email"
+						required
+						bind:value={email}
+						placeholder="Enter your email"
+						disabled={isStandardLoading}
+						class="w-full px-6 py-4 rounded-xl border border-gray-200 focus:border-brand-500 focus:ring-4 focus:ring-brand-100 outline-none transition-all bg-gray-50 focus:bg-white disabled:opacity-50"
+					/>
+					{#if standardError}
+						<p class="text-red-500 text-sm ml-2">{standardError}</p>
+					{/if}
+					<button
+						type="submit"
+						disabled={isStandardLoading}
+						class="w-full bg-gray-900 text-white font-semibold py-4 rounded-xl hover:bg-gray-800 transition-colors shadow-lg hover:shadow-xl disabled:opacity-70 flex items-center justify-center"
+					>
+						{#if isStandardLoading}
+							<svg
+								class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+							>
+								<circle
+									class="opacity-25"
+									cx="12"
+									cy="12"
+									r="10"
+									stroke="currentColor"
+									stroke-width="4"
+								></circle>
+								<path
+									class="opacity-75"
+									fill="currentColor"
+									d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+								></path>
+							</svg>
+							Joining...
+						{:else}
+							Join Waitlist
+						{/if}
+					</button>
+				{/if}
 			</form>
 		</div>
 
 		<!-- Reservation Tier -->
 		<div
+			id="reserve-signup"
 			class="bg-gradient-to-br from-white via-brand-50/30 to-white p-8 md:p-10 rounded-[2rem] border-2 border-brand-200 shadow-2xl shadow-brand-100/50 relative overflow-hidden group transform hover:-translate-y-1 transition-all duration-300 animate-fade-in-up"
 			style="animation-delay: 0.4s;"
 		>
@@ -88,7 +197,7 @@
 			<ul class="space-y-4 mb-8 text-gray-700 relative">
 				<li class="flex items-center gap-3">
 					<span class="bg-brand-100 text-brand-600 rounded-full p-1 text-xs">✓</span>
-					<span><span class="font-semibold">50% Discount</span> on Launch</span>
+					<span><span class="font-semibold">40% Discount</span> on Launch</span>
 				</li>
 				<li class="flex items-center gap-3">
 					<span class="bg-brand-100 text-brand-600 rounded-full p-1 text-xs">✓</span>
@@ -99,17 +208,54 @@
 					Launch Notification
 				</li>
 			</ul>
-			<form class="space-y-4 relative" onsubmit={(e) => e.preventDefault()}>
+			<form
+				class="space-y-4 relative"
+				onsubmit={(e) => {
+					e.preventDefault();
+					handleReservationSignup();
+				}}
+			>
 				<input
 					type="email"
+					required
 					bind:value={reservationEmail}
 					placeholder="Enter your email"
-					class="w-full px-6 py-4 rounded-xl border border-brand-200 focus:border-brand-500 focus:ring-4 focus:ring-brand-100 outline-none transition-all bg-white shadow-sm"
+					disabled={isReservationLoading}
+					class="w-full px-6 py-4 rounded-xl border border-brand-200 focus:border-brand-500 focus:ring-4 focus:ring-brand-100 outline-none transition-all bg-white shadow-sm disabled:opacity-50"
 				/>
+				{#if reservationError}
+					<p class="text-red-500 text-sm ml-2">{reservationError}</p>
+				{/if}
 				<button
-					class="w-full bg-brand-500 text-white font-semibold py-4 rounded-xl hover:bg-brand-600 shadow-lg hover:shadow-brand-200/50 transition-all transform active:scale-[0.98]"
+					type="submit"
+					disabled={isReservationLoading}
+					class="w-full bg-brand-500 text-white font-semibold py-4 rounded-xl hover:bg-brand-600 shadow-lg hover:shadow-brand-200/50 transition-all transform active:scale-[0.98] disabled:opacity-70 disabled:transform-none flex items-center justify-center"
 				>
-					Reserve for €1
+					{#if isReservationLoading}
+						<svg
+							class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+						>
+							<circle
+								class="opacity-25"
+								cx="12"
+								cy="12"
+								r="10"
+								stroke="currentColor"
+								stroke-width="4"
+							></circle>
+							<path
+								class="opacity-75"
+								fill="currentColor"
+								d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+							></path>
+						</svg>
+						Redirecting...
+					{:else}
+						Reserve for €1
+					{/if}
 				</button>
 			</form>
 			<p

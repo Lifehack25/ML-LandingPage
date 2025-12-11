@@ -20,8 +20,8 @@
 			</h2>
 			<div class="space-y-6 text-xl text-gray-600 leading-relaxed font-light">
 				<p>
-					Create a beautiful trail of your memories on the map. See exactly where your locks live
-					and smile knowing how many people have viewed your story.
+					Create a beautiful trail of Memory Locks on the map. See exactly where your locks live and
+					smile knowing how many people have viewed your story.
 				</p>
 			</div>
 		</div>

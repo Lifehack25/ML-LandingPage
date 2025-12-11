@@ -25,12 +25,12 @@
 	}
 </script>
 
-<section class="relative overflow-hidden py-16 md:py-32 isolate">
+<section class="relative overflow-hidden pt-32 pb-16 md:py-32 isolate">
 	<!-- Background Elements -->
 	<div class="absolute inset-0 z-0">
 		<img src={backgroundImage} alt="" class="w-full h-full object-cover" />
 		<div
-			class="absolute inset-0 bg-gradient-to-r from-[#FFD9DD] via-[#FFD9DD]/70 to-transparent"
+			class="absolute inset-0 bg-gradient-to-r from-[#FFEBEE] via-[#FFEBEE]/70 to-transparent"
 		></div>
 	</div>
 	<!-- Decorative Blob -->
@@ -51,8 +51,7 @@
 					the world discover your story.
 				</p>
 				<p class="text-lg text-gray-600 mb-6 max-w-lg leading-relaxed">
-					Join the waitlist for our Kickstarter launch in May 2026. Be among the first couples to
-					tell their story.
+					Join the waitlist and get notified when we launch.
 				</p>
 
 				<form
