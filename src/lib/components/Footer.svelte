@@ -1,4 +1,11 @@
-<footer class="bg-gray-50 py-12 border-t border-gray-100">
+<script>
+	import viewport from '$lib/actions/viewport';
+</script>
+
+<footer
+	use:viewport
+	class="reveal-on-scroll reveal-delay-200 bg-gray-50 py-12 border-t border-gray-100"
+>
 	<div class="max-w-7xl mx-auto px-4 text-center">
 		<p class="text-gray-500 mb-4">
 			© {new Date().getFullYear()} Memory Locks. All rights reserved.

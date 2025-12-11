@@ -4,6 +4,7 @@
 	import heroImage from '$lib/assets/hero-image.png';
 	import backgroundImage from '$lib/assets/background1.jpg';
 	import CreativeButton from '$lib/components/ui/CreativeButton.svelte';
+	import viewport from '$lib/actions/viewport';
 
 	let showSurprise = false;
 
@@ -40,22 +41,30 @@
 
 	<div class="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
 		<div class="grid md:grid-cols-2 gap-12 md:gap-24 items-center">
-			<div class="space-y-8 animate-fade-in-up text-left">
+			<div class="space-y-8 text-left">
 				<h1
-					class="text-5xl md:text-7xl font-bold tracking-tight text-gray-900 leading-[1.1] font-serif"
+					use:viewport
+					class="reveal-on-scroll text-5xl md:text-7xl font-bold tracking-tight text-gray-900 leading-[1.1] font-serif"
 				>
 					Share your <span class="text-brand-500 italic">story</span> with the world.
 				</h1>
-				<p class="text-xl text-gray-600 max-w-lg leading-relaxed font-light">
+				<p
+					use:viewport
+					class="reveal-on-scroll reveal-delay-200 text-xl text-gray-600 max-w-lg leading-relaxed font-light"
+				>
 					A physical lock with a digital soul. Upload your memories, seal them in a lock, and let
 					the world discover your story.
 				</p>
-				<p class="text-lg text-gray-600 mb-6 max-w-lg leading-relaxed">
+				<p
+					use:viewport
+					class="reveal-on-scroll reveal-delay-300 text-lg text-gray-600 mb-6 max-w-lg leading-relaxed"
+				>
 					Join the waitlist and get notified when we launch.
 				</p>
 
 				<form
-					class="flex flex-col sm:flex-row gap-4 pt-4 max-w-lg relative"
+					use:viewport
+					class="reveal-on-scroll reveal-delay-400 flex flex-col sm:flex-row gap-4 pt-4 max-w-lg relative"
 					on:submit|preventDefault
 				>
 					<input
@@ -75,25 +84,30 @@
 					{#if showSurprise}
 						<p
 							in:fly={{ y: 20, duration: 800 }}
-							class="text-base text-brand-600 font-medium italic"
+							class="text-sm text-brand-600 font-medium italic bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm border border-brand-100 inline-block"
 						>
 							A special surprise awaits our earliest customers! 🎉
 						</p>
 					{:else}
 						<button
+							use:viewport
 							on:click={triggerSurprise}
-							class="text-sm text-gray-600 hover:text-brand-500 transition-colors cursor-pointer italic"
+							class="reveal-on-scroll reveal-delay-500 text-sm text-gray-600 hover:text-brand-500 transition-colors cursor-pointer italic"
 						>
 							Psst...
 						</button>
 					{/if}
 				</div>
 			</div>
-			<div class="relative">
+			<div class="relative reveal-scale-up" use:viewport>
 				<div
 					class="absolute inset-0 bg-brand-300 rounded-full blur-[100px] opacity-20 -z-10 transform translate-x-10 translate-y-10"
 				></div>
-				<img src={heroImage} alt="Memory Lock Product" class="w-full h-auto drop-shadow-2xl" />
+				<img
+					src={heroImage}
+					alt="Memory Lock Product"
+					class="w-full h-full object-contain drop-shadow-2xl"
+				/>
 			</div>
 		</div>
 	</div>

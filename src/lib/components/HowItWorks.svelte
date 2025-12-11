@@ -2,6 +2,7 @@
 	import appIcon from '$lib/assets/app-icon.png';
 	import uploadIcon from '$lib/assets/upload.png';
 	import doneIcon from '$lib/assets/done.png';
+	import viewport from '$lib/actions/viewport';
 </script>
 
 <section class="py-32 px-4 relative overflow-hidden bg-[#FFEBEE]">
@@ -17,7 +18,12 @@
 
 	<div class="max-w-7xl mx-auto relative z-10">
 		<div class="text-center mb-24 max-w-2xl mx-auto">
-			<h2 class="text-4xl md:text-5xl font-serif text-gray-900 mb-6 leading-tight">How it works</h2>
+			<h2
+				use:viewport
+				class="reveal-on-scroll text-4xl md:text-5xl font-serif text-gray-900 mb-6 leading-tight"
+			>
+				How it works
+			</h2>
 		</div>
 
 		<div class="relative grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -44,7 +50,7 @@
 			</div>
 
 			<!-- Step 1 -->
-			<div class="group relative z-10">
+			<div use:viewport class="reveal-on-scroll reveal-delay-200 group relative z-10">
 				<div
 					class="relative bg-white backdrop-blur-md rounded-3xl p-8 border border-white/50 shadow-xl shadow-brand-100/50 hover:shadow-2xl hover:shadow-brand-200/50 hover:-translate-y-2 transition-all duration-500"
 				>
@@ -61,7 +67,7 @@
 			</div>
 
 			<!-- Step 2 -->
-			<div class="group relative z-10 md:mt-12">
+			<div use:viewport class="reveal-on-scroll reveal-delay-400 group relative z-10 md:mt-12">
 				<div
 					class="relative bg-white backdrop-blur-md rounded-3xl p-8 border border-white/50 shadow-xl shadow-brand-100/50 hover:shadow-2xl hover:shadow-brand-200/50 hover:-translate-y-2 transition-all duration-500 flex flex-col h-full"
 				>
@@ -79,7 +85,7 @@
 			</div>
 
 			<!-- Step 3 -->
-			<div class="group relative z-10">
+			<div use:viewport class="reveal-on-scroll reveal-delay-600 group relative z-10">
 				<div
 					class="relative bg-white backdrop-blur-md rounded-3xl p-8 border border-white/50 shadow-xl shadow-brand-100/50 hover:shadow-2xl hover:shadow-brand-200/50 hover:-translate-y-2 transition-all duration-500"
 				>

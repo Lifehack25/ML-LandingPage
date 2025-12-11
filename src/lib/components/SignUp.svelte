@@ -1,4 +1,6 @@
 <script lang="ts">
+	import viewport from '$lib/actions/viewport';
+	import Checkout from './Checkout.svelte';
 	let email = $state('');
 	let reservationEmail = $state('');
 	import stripeLogo from '$lib/assets/stripe.webp';
@@ -11,6 +13,7 @@
 	// State for reservation signup
 	let isReservationLoading = $state(false);
 	let reservationError = $state('');
+	let showCheckout = $state(false);
 
 	async function handleStandardSignup() {
 		if (!email) return;
@@ -41,38 +44,22 @@
 		}
 	}
 
-	async function handleReservationSignup() {
+	function handleReservationSignup() {
 		if (!reservationEmail) return;
-
-		isReservationLoading = true;
-		reservationError = '';
-
-		try {
-			const response = await fetch('/api/signup', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ email: reservationEmail, type: 'reservation' })
-			});
-
-			const data = await response.json();
-
-			if (response.ok && data.url) {
-				// Redirect to Stripe Checkout
-				window.location.href = data.url;
-			} else {
-				reservationError = data.message || 'Something went wrong. Please try again.';
-			}
-		} catch (e) {
-			reservationError = 'Failed to connect. Please check your internet connection.';
-		} finally {
-			// Don't turn off loading if redirecting, to prevent flashing
-			// But do turn it off if there was an error
-			if (reservationError) {
-				isReservationLoading = false;
-			}
-		}
+		showCheckout = true;
 	}
 </script>
+
+{#if showCheckout}
+	<Checkout
+		email={reservationEmail}
+		onClose={() => (showCheckout = false)}
+		onSuccess={() => {
+			showCheckout = false;
+			// Optional: Show success state here or redirect handled by Checkout
+		}}
+	/>
+{/if}
 
 <section id="signup" class="relative py-24 px-4 md:px-8 max-w-7xl mx-auto overflow-hidden">
 	<!-- Background Decoration -->
@@ -82,12 +69,12 @@
 
 	<div class="relative z-10 text-center mb-12 px-4">
 		<h2
-			class="text-4xl md:text-5xl font-bold text-gray-900 font-serif mb-4 animate-fade-in-up"
-			style="animation-delay: 0.1s;"
+			use:viewport
+			class="reveal-on-scroll text-4xl md:text-5xl font-bold text-gray-900 font-serif mb-4"
 		>
 			Join the Waitlist
 		</h2>
-		<p class="text-xl text-gray-600 font-light animate-fade-in-up" style="animation-delay: 0.2s;">
+		<p use:viewport class="reveal-on-scroll reveal-delay-100 text-xl text-gray-600 font-light">
 			Be among the first to share their story.
 		</p>
 	</div>
@@ -95,8 +82,8 @@
 	<div class="relative z-10 grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
 		<!-- Free Tier -->
 		<div
-			class="bg-white p-8 md:p-10 rounded-[2rem] border border-gray-100 shadow-xl hover:shadow-2xl transition-all flex flex-col animate-fade-in-up"
-			style="animation-delay: 0.3s;"
+			use:viewport
+			class="reveal-on-scroll reveal-delay-200 bg-white p-8 md:p-10 rounded-[2rem] border border-gray-100 shadow-xl hover:shadow-2xl transition-all flex flex-col"
 		>
 			<div class="mb-8">
 				<h3 class="text-2xl font-bold text-gray-900 font-serif">Get notified when we launch</h3>
@@ -174,8 +161,8 @@
 		<!-- Reservation Tier -->
 		<div
 			id="reserve-signup"
-			class="bg-gradient-to-br from-white via-brand-50/30 to-white p-8 md:p-10 rounded-[2rem] border-2 border-brand-200 shadow-2xl shadow-brand-100/50 relative overflow-hidden group transform hover:-translate-y-1 transition-all duration-300 animate-fade-in-up"
-			style="animation-delay: 0.4s;"
+			use:viewport
+			class="reveal-on-scroll reveal-delay-300 bg-gradient-to-br from-white via-brand-50/30 to-white p-8 md:p-10 rounded-[2rem] border-2 border-brand-200 shadow-2xl shadow-brand-100/50 relative overflow-hidden group transform hover:-translate-y-1 transition-all duration-300"
 		>
 			<div
 				class="absolute top-0 right-0 bg-brand-500 text-white text-xs font-bold px-4 py-2 rounded-bl-2xl shadow-md z-10"

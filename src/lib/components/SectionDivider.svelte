@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
+	import viewport from '$lib/actions/viewport';
 
 	let pathElement;
 	let drawPathElement;
@@ -57,7 +58,11 @@
 	});
 </script>
 
-<div class="w-full relative h-48 overflow-hidden bg-brand-50" aria-hidden="true">
+<div
+	use:viewport
+	class="reveal-on-scroll w-full relative h-48 overflow-hidden bg-brand-50"
+	aria-hidden="true"
+>
 	<svg viewBox="0 0 1440 160" preserveAspectRatio="none" class="absolute bottom-0 w-full h-full">
 		<defs>
 			<linearGradient id="threadGradient" x1="0%" y1="0%" x2="100%" y2="0%">

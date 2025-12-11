@@ -1,3 +1,7 @@
+<script>
+	import viewport from '$lib/actions/viewport';
+</script>
+
 <section id="concept" class="py-24 px-4 relative overflow-hidden">
 	<!-- Background decoration -->
 	<div class="absolute inset-0 bg-brand-50/50 -z-20"></div>
@@ -7,7 +11,8 @@
 
 	<div class="max-w-3xl mx-auto">
 		<div
-			class="relative bg-white p-12 md:p-16 rounded-[2rem] shadow-2xl shadow-brand-200/50 text-center transform hover:rotate-1 transition-transform duration-500 border border-brand-100"
+			use:viewport
+			class="reveal-scale-up relative bg-white p-12 md:p-16 rounded-[2rem] shadow-2xl shadow-brand-200/50 text-center transform hover:rotate-1 transition-transform duration-500 border border-brand-100"
 		>
 			<!-- Decorative seal -->
 			<div
@@ -30,13 +35,21 @@
 			</div>
 
 			<div class="space-y-8 relative">
-				<h2 class="text-4xl md:text-5xl font-serif text-brand-500 italic relative z-10">
+				<h2
+					use:viewport
+					class="reveal-on-scroll reveal-delay-200 text-4xl md:text-5xl font-serif text-brand-500 italic relative z-10"
+				>
 					"We keep your memories safe."
 				</h2>
 
 				<div class="space-y-6 text-xl text-gray-700 leading-relaxed font-light relative z-10">
-					<p class="font-serif italic text-2xl text-brand-400">A love note to the future.</p>
-					<p>
+					<p
+						use:viewport
+						class="reveal-on-scroll reveal-delay-300 font-serif italic text-2xl text-brand-400"
+					>
+						A love note to the future.
+					</p>
+					<p use:viewport class="reveal-on-scroll reveal-delay-400">
 						The moments you seal will stay safe for 50 years or more, unless you choose to let them
 						go. Revisit the lock years from when you sealed it, or let someone you love unlock your
 						story when the time is right.
