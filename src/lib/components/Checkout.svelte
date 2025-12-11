@@ -21,7 +21,8 @@
 
 	// TODO: Replace with your actual Publishable Key or environment variable
 	// e.g., import { PUBLIC_STRIPE_KEY } from '$env/static/public';
-	const PUBLIC_STRIPE_KEY = 'pk_test_...';
+	const PUBLIC_STRIPE_KEY =
+		'pk_live_51Rht4kKvwl83EQ5FoOxvIXqKxApaSsbH9yAdAnzdYPSfPI7ENF9qRz3ohYzLA3CXBVoedc0JE4yJ0yQgmSL3kfC700is3wgv6b';
 
 	onMount(async () => {
 		// 1. Load Stripe
@@ -41,10 +42,16 @@
 				body: JSON.stringify({ email })
 			});
 
-			const { clientSecret, error } = await res.json();
+			const data = await res.json();
 
-			if (error) {
-				throw new Error(error.message);
+			if (!res.ok) {
+				throw new Error(data.message || 'Payment initialization failed.');
+			}
+
+			const { clientSecret } = data;
+
+			if (!clientSecret) {
+				throw new Error('Missing payment information from server.');
 			}
 
 			// 3. Create Elements
@@ -147,7 +154,9 @@
 
 		<!-- Loading State -->
 		{#if isLoading}
-			<div class="flex flex-col items-center justify-center py-12 space-y-4">
+			<div
+				class="absolute inset-0 flex flex-col items-center justify-center bg-white/50 backdrop-blur-sm z-10 rounded-2xl"
+			>
 				<svg
 					class="animate-spin h-10 w-10 text-brand-500"
 					xmlns="http://www.w3.org/2000/svg"
@@ -162,7 +171,7 @@
 						d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
 					></path>
 				</svg>
-				<p class="text-sm text-gray-500 animate-pulse">Loading secure payment...</p>
+				<p class="text-sm text-gray-500 animate-pulse mt-4">Loading secure payment...</p>
 			</div>
 		{/if}
 
@@ -172,7 +181,8 @@
 				e.preventDefault();
 				handleSubmit();
 			}}
-			class:hidden={isLoading}
+			class:invisible={isLoading}
+			class="transition-opacity duration-300"
 		>
 			<div id="payment-element" class="mb-6 min-h-[250px]">
 				<!-- Stripe Elements will inject the UI here -->
