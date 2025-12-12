@@ -8,7 +8,7 @@
 	import { userState } from '$lib/state/user.svelte';
 
 	let email = $state('');
-	let showSurprise = false;
+	let showSurprise = $state(false);
 
 	async function triggerSurprise(event: MouseEvent) {
 		const target = event.currentTarget as HTMLElement;

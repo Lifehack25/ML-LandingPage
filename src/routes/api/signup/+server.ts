@@ -21,56 +21,72 @@ export const POST: RequestHandler = async ({ request, url }) => {
         const { email, type } = await request.json();
 
         if (!email || !type) {
-            return error(400, 'Email and type are required');
+            return json({ success: false, message: 'Email and signup type are required.' }, { status: 400 });
+        }
+
+        // Basic Email Validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            return json({ success: false, message: 'Please enter a valid email address.' }, { status: 400 });
         }
 
         if (type === 'standard') {
-            // 1. Add to MailerLite Standard Group
-            await addSubscriber(email, STANDARD_GROUP_ID);
-
-            return json({ success: true, message: 'Standard signup successful' });
+            try {
+                // 1. Add to MailerLite Standard Group
+                await addSubscriber(email, STANDARD_GROUP_ID);
+                return json({ success: true, message: 'Welcome to the club! Check your inbox soon.' });
+            } catch (mlError: any) {
+                console.error('MailerLite Integration Error:', mlError);
+                // Return a generic error to the user, but log the specific one
+                return json({ success: false, message: 'We couldn’t sign you up right now. Please try again later.' }, { status: 503 });
+            }
         }
 
         else if (type === 'reservation') {
             if (!stripe) {
                 console.error('Stripe Secret Key is missing');
-                return error(500, 'Payment configuration error: STRIPE_SECRET_KEY is missing');
+                return json({ success: false, message: 'Payments are currently unavailable. Please try again later.' }, { status: 503 });
             }
 
-            // Create Stripe Checkout Session
-            const session = await stripe.checkout.sessions.create({
-                payment_method_types: ['card'],
-                line_items: [
-                    {
-                        price_data: {
-                            currency: 'eur',
-                            product: STRIPE_PRODUCT_ID,
-                            unit_amount: 100, // 1.00 EUR in cents
+            try {
+                // Create Stripe Checkout Session
+                const session = await stripe.checkout.sessions.create({
+                    payment_method_types: ['card'],
+                    line_items: [
+                        {
+                            price_data: {
+                                currency: 'eur',
+                                product: STRIPE_PRODUCT_ID,
+                                unit_amount: 100, // 1.00 EUR in cents
+                            },
+                            quantity: 1,
                         },
-                        quantity: 1,
-                    },
-                ],
-                mode: 'payment',
-                success_url: `${url.origin}/reserve-complete?session_id={CHECKOUT_SESSION_ID}&email=${encodeURIComponent(email)}`,
-                cancel_url: `${url.origin}/#reserve-signup`,
-                customer_email: email,
-                metadata: {
-                    signup_type: 'reservation',
+                    ],
+                    mode: 'payment',
+                    success_url: `${url.origin}/reserve-complete?session_id={CHECKOUT_SESSION_ID}&email=${encodeURIComponent(email)}`,
+                    cancel_url: `${url.origin}/#reserve-signup`,
+                    customer_email: email,
+                    metadata: {
+                        signup_type: 'reservation',
+                    }
+                });
+
+                if (!session.url) {
+                    throw new Error('Stripe session URL missing');
                 }
-            });
 
-            if (!session.url) {
-                return error(500, 'Failed to create Stripe Checkout Session');
+                return json({ success: true, url: session.url });
+            } catch (stripeError: any) {
+                console.error('Stripe Integration Error:', stripeError);
+                return json({ success: false, message: 'Unable to start payment. Please try again.' }, { status: 502 });
             }
-
-            return json({ success: true, url: session.url });
         }
 
         else {
-            return error(400, 'Invalid signup type');
+            return json({ success: false, message: 'Invalid signup type specified.' }, { status: 400 });
         }
     } catch (err: any) {
-        console.error('Signup API Error:', err);
-        return error(500, `Internal Server Error: ${err.message || err}`);
+        console.error('Unexpected Signup API Error:', err);
+        return json({ success: false, message: 'An unexpected error occurred. Please refresh and try again.' }, { status: 500 });
     }
 };

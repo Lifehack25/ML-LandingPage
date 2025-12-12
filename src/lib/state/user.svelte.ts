@@ -6,10 +6,20 @@ export class UserState {
     standardError = $state('');
 
     async handleStandardSignup(email: string) {
-        if (!email) return;
+        this.standardError = '';
+
+        if (!email) {
+            this.standardError = 'Please enter your email.';
+            return;
+        }
+
+        // Basic client-side validation
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            this.standardError = 'That doesn’t look like a valid email.';
+            return;
+        }
 
         this.isStandardLoading = true;
-        this.standardError = '';
         this.standardSuccess = false;
 
         try {
@@ -21,14 +31,16 @@ export class UserState {
 
             const data = await response.json();
 
-            if (response.ok) {
+            if (response.ok && data.success) {
                 this.standardSuccess = true;
-                this.email = ''; // Clear input if desired, or keep it to show "signed up as..."
+                // Optional: keep email in input or clear it. 
+                // this.email = ''; 
             } else {
                 this.standardError = data.message || 'Something went wrong. Please try again.';
             }
         } catch (e) {
-            this.standardError = 'Failed to connect. Please check your internet connection.';
+            console.error('Signup Network Error:', e);
+            this.standardError = 'Unable to connect. Please check your internet connection.';
         } finally {
             this.isStandardLoading = false;
         }
