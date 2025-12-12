@@ -3,6 +3,7 @@
 	export let type: 'button' | 'submit' | 'reset' = 'button';
 	export let onClick: ((e: MouseEvent) => void) | undefined = undefined;
 	export let className: string = '';
+	export let disabled: boolean = false;
 
 	function handleClick(e: MouseEvent) {
 		if (onClick) onClick(e);
@@ -34,6 +35,7 @@
 	<button
 		{type}
 		on:click={handleClick}
+		{disabled}
 		class="relative group inline-flex items-center justify-center overflow-hidden rounded-full
         bg-brand-500 text-white font-semibold transition-all duration-300 ease-out
         shadow-lg shadow-brand-500/20

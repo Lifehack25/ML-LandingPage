@@ -5,7 +5,9 @@
 	import backgroundImage from '$lib/assets/background1.jpg';
 	import CreativeButton from '$lib/components/ui/CreativeButton.svelte';
 	import viewport from '$lib/actions/viewport';
+	import { userState } from '$lib/state/user.svelte';
 
+	let email = $state('');
 	let showSurprise = false;
 
 	async function triggerSurprise(event: MouseEvent) {
@@ -62,23 +64,67 @@
 					Join the waitlist and get notified when we launch.
 				</p>
 
-				<form
-					use:viewport
-					class="reveal-on-scroll reveal-delay-400 flex flex-col sm:flex-row gap-4 pt-4 max-w-lg relative"
-					on:submit|preventDefault
-				>
-					<input
-						type="email"
-						placeholder="Enter your email address"
-						class="flex-1 px-6 py-4 rounded-full bg-white border border-gray-200 shadow-md focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all font-light text-gray-600 placeholder:text-gray-500"
-					/>
-					<CreativeButton
-						type="submit"
-						className="px-8 py-4 text-lg font-semibold shadow-xl hover:shadow-2xl hover:shadow-brand-500/30 whitespace-nowrap"
+				{#if userState.standardSuccess}
+					<div
+						use:viewport
+						class="reveal-on-scroll reveal-delay-400 p-6 bg-green-50 border border-green-100 rounded-2xl max-w-lg mt-4 shadow-sm"
 					>
-						Join Waitlist
-					</CreativeButton>
-				</form>
+						<div class="flex items-center gap-3 text-green-700">
+							<div class="bg-green-100 p-2 rounded-full">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									class="h-5 w-5"
+									viewBox="0 0 20 20"
+									fill="currentColor"
+								>
+									<path
+										fill-rule="evenodd"
+										d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+										clip-rule="evenodd"
+									/>
+								</svg>
+							</div>
+							<div>
+								<p class="font-semibold">You're on the waitlist!</p>
+								<p class="text-sm opacity-90">Keep an eye on your inbox for updates.</p>
+							</div>
+						</div>
+					</div>
+				{:else}
+					<form
+						use:viewport
+						class="reveal-on-scroll reveal-delay-400 flex flex-col sm:flex-row gap-4 pt-4 max-w-lg relative"
+						onsubmit={(e) => {
+							e.preventDefault();
+							userState.handleStandardSignup(email);
+						}}
+					>
+						<input
+							type="email"
+							bind:value={email}
+							placeholder="Enter your email address"
+							disabled={userState.isStandardLoading}
+							class="flex-1 px-6 py-4 rounded-full bg-white border border-gray-200 shadow-md focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all font-light text-gray-600 placeholder:text-gray-500 disabled:opacity-60"
+						/>
+						<CreativeButton
+							type="submit"
+							className="px-8 py-4 text-lg font-semibold shadow-xl hover:shadow-2xl hover:shadow-brand-500/30 whitespace-nowrap disabled:opacity-70 disabled:cursor-not-allowed"
+							disabled={userState.isStandardLoading}
+						>
+							{#if userState.isStandardLoading}
+								Joining...
+							{:else}
+								Join Waitlist
+							{/if}
+						</CreativeButton>
+
+						{#if userState.standardError}
+							<div class="absolute -bottom-8 left-6 text-red-500 text-sm">
+								{userState.standardError}
+							</div>
+						{/if}
+					</form>
+				{/if}
 
 				<div class="mt-4 h-6">
 					{#if showSurprise}
@@ -91,7 +137,7 @@
 					{:else}
 						<div class="reveal-on-scroll reveal-delay-500" use:viewport>
 							<button
-								on:click={triggerSurprise}
+								onclick={triggerSurprise}
 								class="text-sm text-gray-600 hover:text-brand-500 transition-colors cursor-pointer italic"
 							>
 								Psst...
