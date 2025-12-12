@@ -1,12 +1,13 @@
 import { json, error } from '@sveltejs/kit';
 import Stripe from 'stripe';
 import { env } from '$env/dynamic/private';
-import { addContactToSendGrid, sendWelcomeEmail } from '$lib/server/sendgrid';
+import { addSubscriber } from '$lib/server/mailerlite';
 import type { RequestHandler } from './$types';
 
 // Constants
 const STRIPE_SECRET_KEY = env.STRIPE_SECRET_KEY;
 const STRIPE_PRODUCT_ID = 'prod_SdBiU33uojWUVb'; // User provided
+const STANDARD_GROUP_ID = '158904110692697978';
 
 // Initialize Stripe
 // Note: We use a lazy initialization or a check to prevent errors at build time if env is missing
@@ -24,10 +25,8 @@ export const POST: RequestHandler = async ({ request, url }) => {
         }
 
         if (type === 'standard') {
-            // 1. Add to SendGrid
-            await addContactToSendGrid(email, 'standard');
-            // 2. Send Welcome Email
-            await sendWelcomeEmail(email, 'standard');
+            // 1. Add to MailerLite Standard Group
+            await addSubscriber(email, STANDARD_GROUP_ID);
 
             return json({ success: true, message: 'Standard signup successful' });
         }

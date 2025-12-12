@@ -1,13 +1,14 @@
 import { error } from '@sveltejs/kit';
 import Stripe from 'stripe';
 import { env } from '$env/dynamic/private';
-import { addContactToSendGrid, sendWelcomeEmail } from '$lib/server/sendgrid';
+import { addSubscriber } from '$lib/server/mailerlite';
 import type { PageServerLoad } from './$types';
 
 const STRIPE_SECRET_KEY = env.STRIPE_SECRET_KEY;
+const VIP_GROUP_ID = '158995496381187854';
 
 const stripe = STRIPE_SECRET_KEY ? new Stripe(STRIPE_SECRET_KEY, {
-    apiVersion: '2025-01-27.acacia',
+    apiVersion: '2025-11-17.clover' as any,
     httpClient: Stripe.createFetchHttpClient(),
 }) : null;
 
@@ -46,16 +47,12 @@ export const load: PageServerLoad = async ({ url }) => {
             return { status: 'error', message: 'No email found in session' };
         }
 
-        // 2. Add to SendGrid (Reservation Type)
-        // We do this here to ensure it only happens after payment
+        // 2. Add to MailerLite (VIP/Reservation Group)
         try {
-            await addContactToSendGrid(email, 'reservation');
-            await sendWelcomeEmail(email, 'reservation');
-        } catch (sgError) {
-            console.error("SendGrid processing failed despite payment success:", sgError);
+            await addSubscriber(email, VIP_GROUP_ID);
+        } catch (mlError) {
+            console.error("MailerLite processing failed despite payment success:", mlError);
             // We still return success to the user because they PAID. 
-            // We should ideally have a robust retry queue, but for this task,
-            // logging the error is the minimum.
         }
 
         return {

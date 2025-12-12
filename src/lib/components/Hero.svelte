@@ -89,13 +89,14 @@
 							A special surprise awaits our earliest customers! 🎉
 						</p>
 					{:else}
-						<button
-							use:viewport
-							on:click={triggerSurprise}
-							class="reveal-on-scroll reveal-delay-500 text-sm text-gray-600 hover:text-brand-500 transition-colors cursor-pointer italic"
-						>
-							Psst...
-						</button>
+						<div class="reveal-on-scroll reveal-delay-500" use:viewport>
+							<button
+								on:click={triggerSurprise}
+								class="text-sm text-gray-600 hover:text-brand-500 transition-colors cursor-pointer italic"
+							>
+								Psst...
+							</button>
+						</div>
 					{/if}
 				</div>
 			</div>

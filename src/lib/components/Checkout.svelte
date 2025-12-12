@@ -1,4 +1,5 @@
 <script lang="ts">
+	import stripeLogo from '$lib/assets/stripe.webp';
 	import { onMount } from 'svelte';
 	import { loadStripe } from '@stripe/stripe-js';
 	import { fade, scale } from 'svelte/transition';
@@ -242,8 +243,10 @@
 						d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
 					/>
 				</svg>
-				Encrypted and secure payment by Stripe
+				Encrypted and secure payment by
+				<img src={stripeLogo} alt="Stripe" class="h-4 opacity-60 grayscale" />
 			</div>
 		</form>
 	</div>
 </div>
+```
