@@ -3,8 +3,6 @@
 	import Checkout from './Checkout.svelte';
 	let email = $state('');
 	let reservationEmail = $state('');
-	import stripeLogo from '$lib/assets/stripe.webp';
-
 	import { userState } from '$lib/state/user.svelte';
 
 	// State for reservation signup
@@ -31,7 +29,7 @@
 	/>
 {/if}
 
-<section id="signup" class="relative py-24 px-4 md:px-8 max-w-7xl mx-auto overflow-hidden">
+<section id="signup" class="relative pt-24 pb-48 px-4 md:px-8 max-w-7xl mx-auto overflow-hidden">
 	<!-- Background Decoration -->
 	<div
 		class="absolute inset-0 bg-gradient-to-b from-transparent via-brand-50/20 to-transparent pointer-events-none"
@@ -42,7 +40,7 @@
 			use:viewport
 			class="reveal-on-scroll text-4xl md:text-5xl font-bold text-gray-900 font-serif mb-4"
 		>
-			Join the Waitlist
+			Join the Waitlist!
 		</h2>
 		<p use:viewport class="reveal-on-scroll reveal-delay-100 text-xl text-gray-600 font-light">
 			Be among the first to share their story.
@@ -53,7 +51,7 @@
 		<!-- Free Tier -->
 		<div
 			use:viewport
-			class="reveal-on-scroll reveal-delay-200 bg-white p-8 md:p-10 rounded-[2rem] border border-gray-100 shadow-xl hover:shadow-2xl transition-all flex flex-col"
+			class="reveal-on-scroll reveal-delay-200 bg-white p-8 md:p-10 rounded-[2rem] border border-gray-100 shadow-xl hover:shadow-2xl transition-all duration-200 ease-out flex flex-col"
 		>
 			<div class="mb-8">
 				<h3 class="text-2xl font-bold text-gray-900 font-serif">Get notified when we launch</h3>
@@ -128,7 +126,7 @@
 					<button
 						type="submit"
 						disabled={userState.isStandardLoading}
-						class="w-full bg-gray-900 text-white font-semibold py-4 rounded-xl hover:bg-gray-800 transition-colors shadow-lg hover:shadow-xl disabled:opacity-70 flex items-center justify-center transform hover:-translate-y-0.5"
+						class="cursor-pointer w-full bg-gray-900 text-white font-semibold py-4 rounded-xl hover:bg-gray-800 transition-all duration-200 ease-out shadow-lg hover:shadow-xl disabled:opacity-70 flex items-center justify-center transform hover:-translate-y-0.5"
 					>
 						{#if userState.isStandardLoading}
 							<svg
@@ -164,7 +162,7 @@
 		<div
 			id="reserve-signup"
 			use:viewport
-			class="reveal-on-scroll reveal-delay-300 bg-gradient-to-br from-white via-brand-50/30 to-white p-8 md:p-10 rounded-[2rem] border-2 border-brand-200 shadow-2xl shadow-brand-100/50 relative overflow-hidden group transform hover:-translate-y-1 transition-all duration-300"
+			class="reveal-on-scroll reveal-delay-300 bg-gradient-to-br from-white via-brand-50/30 to-white p-8 md:p-10 rounded-[2rem] border-2 border-brand-200 shadow-2xl shadow-brand-100/50 relative overflow-hidden group transform hover:-translate-y-1 transition-all duration-200 ease-out"
 		>
 			<div
 				class="absolute top-0 right-0 bg-brand-500 text-white text-xs font-bold px-4 py-2 rounded-bl-2xl shadow-md z-10"
@@ -218,7 +216,7 @@
 				<button
 					type="submit"
 					disabled={isReservationLoading}
-					class="w-full bg-brand-500 text-white font-semibold py-4 rounded-xl hover:bg-brand-600 shadow-lg hover:shadow-brand-200/50 transition-all transform active:scale-[0.98] disabled:opacity-70 disabled:transform-none flex items-center justify-center"
+					class="cursor-pointer w-full bg-brand-500 text-white font-semibold py-4 rounded-xl hover:bg-brand-600 shadow-lg hover:shadow-brand-200/50 transition-all duration-200 ease-out transform active:scale-[0.98] disabled:opacity-70 disabled:transform-none flex items-center justify-center"
 				>
 					{#if isReservationLoading}
 						<svg
@@ -250,7 +248,11 @@
 			<p
 				class="text-sm text-center text-gray-400 mt-6 relative flex items-center justify-center gap-1"
 			>
-				Secure payment with<img src={stripeLogo} alt="Stripe" class="h-4 opacity-60 grayscale" />
+				Secure payment with<img
+					src="https://imagedelivery.net/Fh6D8c3CvE0G8hv20vsbkw/e3f53f64-de47-4135-be28-6495e8308800/icon"
+					alt="Stripe"
+					class="h-5 opacity-60 grayscale"
+				/>
 			</p>
 		</div>
 	</div>

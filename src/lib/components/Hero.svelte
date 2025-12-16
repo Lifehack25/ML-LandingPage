@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { fade, fly } from 'svelte/transition';
-	import heroImage from '$lib/assets/hero-image.png';
-	import backgroundImage from '$lib/assets/background1.jpg';
 	import CreativeButton from '$lib/components/ui/CreativeButton.svelte';
 	import viewport from '$lib/actions/viewport';
 	import { userState } from '$lib/state/user.svelte';
@@ -31,7 +29,17 @@
 <section class="relative overflow-hidden pt-32 pb-16 md:py-32 isolate">
 	<!-- Background Elements -->
 	<div class="absolute inset-0 z-0">
-		<img src={backgroundImage} alt="" class="w-full h-full object-cover" />
+		<picture>
+			<source
+				media="(max-width: 767px)"
+				srcset="https://imagedelivery.net/Fh6D8c3CvE0G8hv20vsbkw/5256f418-a509-4bc4-f24a-fdd07c12d500/heromobile"
+			/>
+			<img
+				src="https://imagedelivery.net/Fh6D8c3CvE0G8hv20vsbkw/5256f418-a509-4bc4-f24a-fdd07c12d500/hero"
+				alt=""
+				class="w-full h-full object-cover"
+			/>
+		</picture>
 		<div
 			class="absolute inset-0 bg-gradient-to-r from-[#FFEBEE] via-[#FFEBEE]/70 to-transparent"
 		></div>
@@ -150,12 +158,29 @@
 				<div
 					class="absolute inset-0 bg-brand-300 rounded-full blur-[100px] opacity-20 -z-10 transform translate-x-10 translate-y-10"
 				></div>
-				<img
-					src={heroImage}
-					alt="Memory Lock Product"
-					class="w-full h-full object-contain drop-shadow-2xl"
-				/>
+				<picture>
+					<source
+						media="(max-width: 767px)"
+						srcset="https://imagedelivery.net/Fh6D8c3CvE0G8hv20vsbkw/b48d34e1-07d0-4db2-552a-80fa2d8e3600/content"
+					/>
+					<img
+						src="https://imagedelivery.net/Fh6D8c3CvE0G8hv20vsbkw/b48d34e1-07d0-4db2-552a-80fa2d8e3600/standard"
+						alt="Memory Lock Product"
+						class="w-full h-full object-contain drop-shadow-2xl"
+					/>
+				</picture>
 			</div>
 		</div>
+	</div>
+	<div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-5">
+		<svg
+			data-name="Layer 1"
+			xmlns="http://www.w3.org/2000/svg"
+			viewBox="0 0.8667 1 0.1333"
+			preserveAspectRatio="none"
+			class="relative block w-full h-[60px] md:h-[100px]"
+		>
+			<path d="M0,0.8667 C0.2,0.9444 0.8,0.9444 1,0.8667 V1 H0 Z" fill="#FFEBEE"></path>
+		</svg>
 	</div>
 </section>

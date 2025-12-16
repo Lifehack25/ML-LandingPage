@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import logo from '$lib/assets/logo.png';
 	import CreativeButton from '$lib/components/ui/CreativeButton.svelte';
 </script>
 
@@ -9,7 +8,7 @@
 >
 	<div class="flex items-center">
 		<img
-			src={logo}
+			src="https://imagedelivery.net/Fh6D8c3CvE0G8hv20vsbkw/43379da0-d88a-42ea-fec6-7b345c7e2800/thumb"
 			alt="Memory Locks Logo"
 			class="h-16 w-auto animate-fade-in-up"
 			style="animation-delay: 0.1s;"
@@ -22,7 +21,7 @@
 				e.preventDefault();
 				const signupSection = document.getElementById('reserve-signup');
 				if (signupSection) {
-					signupSection.scrollIntoView({ behavior: 'smooth' });
+					signupSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
 				}
 			}}
 			className="px-6 py-2 shadow-lg hover:shadow-xl hover:shadow-brand-500/30 animate-fade-in-up"

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import stripeLogo from '$lib/assets/stripe.webp';
 	import { onMount } from 'svelte';
 	import { loadStripe } from '@stripe/stripe-js';
 	import { fade, scale } from 'svelte/transition';
@@ -244,7 +243,11 @@
 					/>
 				</svg>
 				Encrypted and secure payment by
-				<img src={stripeLogo} alt="Stripe" class="h-4 opacity-60 grayscale" />
+				<img
+					src="https://imagedelivery.net/Fh6D8c3CvE0G8hv20vsbkw/e3f53f64-de47-4135-be28-6495e8308800/icon"
+					alt="Stripe"
+					class="h-5 opacity-60 grayscale"
+				/>
 			</div>
 		</form>
 	</div>

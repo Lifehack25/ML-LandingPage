@@ -10,15 +10,14 @@ function ensureIntersectionObserver() {
 
             if (entry.isIntersecting) {
                 entry.target.classList.add('intersected');
-                // We want to keep observing to potentially support re-animations or just leave logic simple
-                // If "once" behavior is strictly desired everywhere, we can unobserve. 
-                // For now, let's keep it observed but typical usage is "animate-once" via CSS.
-                // Actually, standard entrance animations usually only happen once.
-                // Let's make it consistent: add 'intersected', keep it there.
 
-                // If we want it to ONLY animate once per page load, we don't remove 'intersected' on leave.
-                // If we want it to replay, we remove it.
-                // Let's stick to "add only" for now to avoid scrolling up/down triggering it constantly.
+                // Remove delay classes after animation completes to fix hover responsiveness
+                setTimeout(() => {
+                    const classesToRemove = Array.from(entry.target.classList)
+                        .filter(c => c.startsWith('reveal-delay-'));
+                    entry.target.classList.remove(...classesToRemove);
+                }, 2000);
+
                 intersectionObserver.unobserve(entry.target);
             }
         });

@@ -1,7 +1,4 @@
 <script lang="ts">
-	import appIcon from '$lib/assets/app-icon.png';
-	import uploadIcon from '$lib/assets/upload.png';
-	import doneIcon from '$lib/assets/done.png';
 	import viewport from '$lib/actions/viewport';
 </script>
 
@@ -55,9 +52,9 @@
 					class="relative bg-white backdrop-blur-md rounded-3xl p-8 border border-white/50 shadow-xl shadow-brand-100/50 hover:shadow-2xl hover:shadow-brand-200/50 hover:-translate-y-2 transition-all duration-500"
 				>
 					<img
-						src={appIcon}
+						src="https://imagedelivery.net/Fh6D8c3CvE0G8hv20vsbkw/597a1111-f618-4e91-463c-1cadc1201c00/icon"
 						alt="Connect"
-						class="w-16 h-16 object-contain mb-6 opacity-90 group-hover:scale-110 transition-transform duration-500"
+						class="w-14 h-14 object-contain mb-6 opacity-90 group-hover:scale-110 transition-transform duration-500"
 					/>
 					<h3 class="text-xl font-serif text-gray-900 mb-3">1. Connect</h3>
 					<p class="text-gray-600 font-light leading-relaxed">
@@ -72,7 +69,7 @@
 					class="relative bg-white backdrop-blur-md rounded-3xl p-8 border border-white/50 shadow-xl shadow-brand-100/50 hover:shadow-2xl hover:shadow-brand-200/50 hover:-translate-y-2 transition-all duration-500 flex flex-col h-full"
 				>
 					<img
-						src={uploadIcon}
+						src="https://imagedelivery.net/Fh6D8c3CvE0G8hv20vsbkw/0aee011f-49db-4a2d-617b-278ab9631100/icon"
 						alt="Upload"
 						class="w-16 h-16 object-contain mb-6 opacity-90 group-hover:scale-110 transition-transform duration-500"
 					/>
@@ -90,7 +87,7 @@
 					class="relative bg-white backdrop-blur-md rounded-3xl p-8 border border-white/50 shadow-xl shadow-brand-100/50 hover:shadow-2xl hover:shadow-brand-200/50 hover:-translate-y-2 transition-all duration-500"
 				>
 					<img
-						src={doneIcon}
+						src="https://imagedelivery.net/Fh6D8c3CvE0G8hv20vsbkw/23de9e57-4c6b-40c4-a85a-1c79f51b6d00/icon"
 						alt="Seal"
 						class="w-12 h-12 object-contain mb-6 opacity-90 group-hover:scale-110 transition-transform duration-500"
 					/>

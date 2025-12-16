@@ -14,7 +14,7 @@
 	<a
 		{href}
 		on:click={handleClick}
-		class="relative group inline-flex items-center justify-center overflow-hidden rounded-full
+		class="cursor-pointer relative group inline-flex items-center justify-center overflow-hidden rounded-full
         bg-brand-500 text-white font-semibold transition-all duration-300 ease-out
         shadow-lg shadow-brand-500/20
         hover:shadow-2xl hover:shadow-brand-500/50 hover:-translate-y-1 hover:scale-[1.02]
@@ -36,7 +36,7 @@
 		{type}
 		on:click={handleClick}
 		{disabled}
-		class="relative group inline-flex items-center justify-center overflow-hidden rounded-full
+		class="cursor-pointer relative group inline-flex items-center justify-center overflow-hidden rounded-full
         bg-brand-500 text-white font-semibold transition-all duration-300 ease-out
         shadow-lg shadow-brand-500/20
         hover:shadow-2xl hover:shadow-brand-500/50 hover:-translate-y-1 hover:scale-[1.02]

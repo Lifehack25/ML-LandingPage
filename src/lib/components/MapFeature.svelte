@@ -1,5 +1,4 @@
 <script lang="ts">
-	import mapImage from '$lib/assets/app-map.png';
 	import viewport from '$lib/actions/viewport';
 </script>
 
@@ -9,11 +8,17 @@
 			<div
 				class="absolute inset-0 bg-brand-200 rounded-full blur-3xl opacity-30 -z-10 transform -translate-x-10"
 			></div>
-			<img
-				src={mapImage}
-				alt="Map of Memory Locks"
-				class="w-full h-auto drop-shadow-2xl relative z-10"
-			/>
+			<picture>
+				<source
+					media="(max-width: 767px)"
+					srcset="https://imagedelivery.net/Fh6D8c3CvE0G8hv20vsbkw/b48d34e1-07d0-4db2-552a-80fa2d8e3600/content"
+				/>
+				<img
+					src="https://imagedelivery.net/Fh6D8c3CvE0G8hv20vsbkw/b48d34e1-07d0-4db2-552a-80fa2d8e3600/standard"
+					alt="Map of Memory Locks"
+					class="w-full h-auto drop-shadow-2xl relative z-10"
+				/>
+			</picture>
 		</div>
 		<div class="order-1 md:order-2 space-y-8">
 			<h2

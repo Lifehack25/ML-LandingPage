@@ -7,6 +7,7 @@
 	import MapFeature from '$lib/components/MapFeature.svelte';
 	import SignUp from '$lib/components/SignUp.svelte';
 	import Footer from '$lib/components/Footer.svelte';
+	import QA from '$lib/components/QA.svelte';
 </script>
 
 <div
@@ -20,6 +21,7 @@
 		<About />
 		<MapFeature />
 		<SignUp />
+		<QA />
 	</main>
 	<Footer />
 </div>
