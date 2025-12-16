@@ -17,10 +17,14 @@
 		// Dynamically import confetti to avoid SSR issues
 		const confetti = (await import('canvas-confetti')).default;
 
+		const isMobile = window.innerWidth < 768;
+		const particleCount = isMobile ? 40 : 100;
+		const spread = isMobile ? 50 : 70;
+
 		showSurprise = true;
 		confetti({
-			particleCount: 100,
-			spread: 70,
+			particleCount,
+			spread,
 			origin: { x, y }
 		});
 	}

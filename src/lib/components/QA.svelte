@@ -96,7 +96,7 @@
 			{#each questions as q (q.id)}
 				<div use:viewport class="reveal-on-scroll">
 					<div
-						class="bg-white/60 backdrop-blur-md rounded-2xl border border-white/50 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden"
+						class="bg-white/90 rounded-2xl border border-white/50 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden"
 					>
 						<button
 							class="w-full text-left p-6 flex justify-between items-center gap-4 focus:outline-none cursor-pointer"
