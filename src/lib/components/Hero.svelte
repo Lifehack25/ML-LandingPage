@@ -158,17 +158,11 @@
 				<div
 					class="absolute inset-0 bg-brand-300 rounded-full blur-[100px] opacity-20 -z-10 transform translate-x-10 translate-y-10"
 				></div>
-				<picture>
-					<source
-						media="(max-width: 767px)"
-						srcset="https://imagedelivery.net/Fh6D8c3CvE0G8hv20vsbkw/b48d34e1-07d0-4db2-552a-80fa2d8e3600/content"
-					/>
-					<img
-						src="https://imagedelivery.net/Fh6D8c3CvE0G8hv20vsbkw/b48d34e1-07d0-4db2-552a-80fa2d8e3600/standard"
-						alt="Memory Lock Product"
-						class="w-full h-full object-contain drop-shadow-2xl"
-					/>
-				</picture>
+				<img
+					src="https://imagedelivery.net/Fh6D8c3CvE0G8hv20vsbkw/b48d34e1-07d0-4db2-552a-80fa2d8e3600/standard"
+					alt="Memory Lock Product"
+					class="w-full h-full object-contain drop-shadow-2xl"
+				/>
 			</div>
 		</div>
 	</div>
