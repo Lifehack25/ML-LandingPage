@@ -8,16 +8,11 @@
 			<div
 				class="absolute inset-0 bg-brand-200 rounded-full blur-3xl opacity-30 -z-10 transform -translate-x-10"
 			></div>
-			<div class="relative grid grid-cols-2 gap-4 items-center p-4">
-				<img
-					src="https://imagedelivery.net/Fh6D8c3CvE0G8hv20vsbkw/3da15e74-f08d-4f79-8d05-39410eb68c00/standard"
-					alt="Map Interface"
-					class="w-full drop-shadow-2xl rounded-xl -rotate-2 transform transition-transform hover:scale-105 duration-500"
-				/>
+			<div class="relative p-4">
 				<img
 					src="https://imagedelivery.net/Fh6D8c3CvE0G8hv20vsbkw/be15dfe6-d60d-41b7-c7b1-7cba0522b400/standard"
 					alt="Map Detail"
-					class="w-full drop-shadow-2xl rounded-xl rotate-3 transform transition-transform hover:scale-105 duration-500"
+					class="w-full h-auto drop-shadow-2xl rounded-xl relative z-10 transform transition-transform hover:scale-105 duration-500"
 				/>
 			</div>
 		</div>
