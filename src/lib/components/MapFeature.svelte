@@ -25,8 +25,8 @@
 			</h2>
 			<div class="space-y-6 text-xl text-gray-600 leading-relaxed font-light">
 				<p use:viewport class="reveal-on-scroll reveal-delay-200">
-					Create a beautiful trail of Memory Locks on the map. See exactly where your locks live and
-					smile knowing people all around the world get to view your story.
+					Create a beautiful trail of Memory Locks on the map. See exactly where they reside and
+					smile knowing that people all around the world are viewing your story.
 				</p>
 			</div>
 		</div>
