@@ -22,7 +22,7 @@
 			question: 'Can you remove the media once the lock is sealed?',
 			isOpen: false,
 			answer:
-				'Yes. You always maintain full control to remove your media from the lock. However, after you have sealed the lock, you cannot upload new media to it unless you explicitly choose to unseal it.',
+				'Yes. You always maintain full control to remove your media from the lock. However, after you have sealed the love lock, you cannot upload new media to it unless you explicitly choose to unseal it.',
 			type: 'text'
 		},
 		{
@@ -30,7 +30,7 @@
 			question: 'Do you need an app to scan the lock & view the album?',
 			isOpen: false,
 			answer:
-				'No, that is one of the main concepts of Memory Locks. Anyone with a smartphone can scan the lock and the album will open in their internet browser.',
+				'No, that is one of the main concepts of Memory Locks. Anyone with a smartphone can scan the love lock and the album will open in their internet browser.',
 			type: 'text'
 		}
 	];
