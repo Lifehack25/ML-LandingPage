@@ -54,13 +54,13 @@
 	></div>
 
 	<div class="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
-		<div class="grid md:grid-cols-2 gap-12 md:gap-24 items-center">
+		<div class="grid md:grid-cols-[1.15fr_0.85fr] gap-8 md:gap-12 items-center">
 			<div class="space-y-8 text-left">
 				<h1
 					use:viewport
 					class="reveal-on-scroll text-5xl md:text-7xl font-bold tracking-tight text-gray-900 leading-[1.1] font-serif"
 				>
-					Share your <span class="text-brand-500 italic">story</span> with the world.
+					Share your <span class="text-brand-500 italic">moments</span> with the world.
 				</h1>
 				<p
 					use:viewport
@@ -163,7 +163,7 @@
 					class="absolute inset-0 bg-brand-300 rounded-full blur-[100px] opacity-20 -z-10 transform translate-x-10 translate-y-10"
 				></div>
 				<img
-					src="https://imagedelivery.net/Fh6D8c3CvE0G8hv20vsbkw/b003c31b-4bca-4795-417a-7113893c1800/standard"
+					src="https://imagedelivery.net/Fh6D8c3CvE0G8hv20vsbkw/64e3210e-2be0-43c9-a89e-21c6ca007900/standard"
 					alt="Memory Lock Product"
 					class="w-full h-full object-contain drop-shadow-2xl"
 				/>
