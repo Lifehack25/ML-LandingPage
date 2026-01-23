@@ -19,9 +19,6 @@
 				>
 					Terms of Service
 				</h1>
-				<p in:fly={{ y: 20, duration: 800, delay: 350 }} class="text-sm text-gray-500 mb-8">
-					Effective Date: January 20, 2026
-				</p>
 
 				<div class="prose prose-lg prose-gray max-w-none space-y-6">
 					<div in:fly={{ y: 20, duration: 800, delay: 400 }}>
@@ -72,9 +69,6 @@
 				>
 					Privacy Policy
 				</h1>
-				<p in:fly={{ y: 20, duration: 800, delay: 650 }} class="text-sm text-gray-500 mb-8">
-					Last Updated: January 20, 2026
-				</p>
 
 				<div class="prose prose-lg prose-gray max-w-none space-y-6">
 					<div in:fly={{ y: 20, duration: 800, delay: 700 }}>
