@@ -11,8 +11,8 @@
 			© {new Date().getFullYear()} Memory Locks. All rights reserved.
 		</p>
 		<div class="flex justify-center gap-6 text-sm text-gray-400">
-			<a href="#" class="hover:text-brand-500 transition-colors">Privacy Policy</a>
-			<a href="#" class="hover:text-brand-500 transition-colors">Terms of Service</a>
+			<a href="/legal" class="hover:text-brand-500 transition-colors">Privacy Policy</a>
+			<a href="/legal" class="hover:text-brand-500 transition-colors">Terms of Service</a>
 			<a href="#" class="hover:text-brand-500 transition-colors">Contact</a>
 		</div>
 	</div>

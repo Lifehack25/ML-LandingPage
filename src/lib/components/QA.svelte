@@ -27,7 +27,7 @@
 		},
 		{
 			id: 4,
-			question: 'Do you need an app to scan the lock & view the album?',
+			question: 'Do you need an app to scan the lock and view the album?',
 			isOpen: false,
 			answer:
 				'No, that is one of the main concepts of Memory Locks. Anyone with a smartphone can scan the love lock and the album will open in their internet browser.',
