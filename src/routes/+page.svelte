@@ -10,6 +10,38 @@
 	import QA from '$lib/components/QA.svelte';
 </script>
 
+<svelte:head>
+	<title>Memory Locks - Share your moments with the world</title>
+	<meta
+		name="description"
+		content="A physical lock with a digital soul. Upload your memories, seal them in a lock, and let the world discover your story."
+	/>
+
+	<!-- Open Graph / Facebook -->
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Memory Locks - Share your moments with the world" />
+	<meta
+		property="og:description"
+		content="A physical lock with a digital soul. Upload your memories, seal them in a lock, and let the world discover your story."
+	/>
+	<meta
+		property="og:image"
+		content="https://imagedelivery.net/Fh6D8c3CvE0G8hv20vsbkw/64e3210e-2be0-43c9-a89e-21c6ca007900/standard"
+	/>
+
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Memory Locks - Share your moments with the world" />
+	<meta
+		name="twitter:description"
+		content="A physical lock with a digital soul. Upload your memories, seal them in a lock, and let the world discover your story."
+	/>
+	<meta
+		name="twitter:image"
+		content="https://imagedelivery.net/Fh6D8c3CvE0G8hv20vsbkw/64e3210e-2be0-43c9-a89e-21c6ca007900/standard"
+	/>
+</svelte:head>
+
 <div
 	class="min-h-screen bg-brand-50 font-sans text-gray-900 selection:bg-brand-200 selection:text-brand-900"
 >
