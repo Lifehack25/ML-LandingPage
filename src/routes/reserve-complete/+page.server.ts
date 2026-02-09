@@ -12,6 +12,15 @@ const stripe = STRIPE_SECRET_KEY ? new Stripe(STRIPE_SECRET_KEY, {
     httpClient: Stripe.createFetchHttpClient(),
 }) : null;
 
+/**
+ * Server Load: /reserve-complete
+ * 
+ * Verified the Stripe Checkout Session after a successful payment.
+ * If valid, adds the user to the MailerLite VIP group.
+ * 
+ * @param url - Contains the 'session_id' and fallback 'email' query parameters.
+ * @returns Page data with status (success/error) and customer details.
+ */
 export const load: PageServerLoad = async ({ url }) => {
     const sessionId = url.searchParams.get('session_id');
     const emailParam = url.searchParams.get('email'); // Fallback/Check

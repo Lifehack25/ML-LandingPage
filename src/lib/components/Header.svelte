@@ -1,4 +1,9 @@
 <script lang="ts">
+	/**
+	 * @component
+	 * The main site header/navigation.
+	 * Adapts to show "Back" button on legal pages, or anchor links on the home page.
+	 */
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import CreativeButton from '$lib/components/ui/CreativeButton.svelte';

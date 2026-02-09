@@ -1,4 +1,9 @@
 <script lang="ts">
+	/**
+	 * @component
+	 * A FAQ section with toggleable accordions.
+	 * Handles different types of answers (text vs dimensions).
+	 */
 	import viewport from '$lib/actions/viewport';
 	import { slide } from 'svelte/transition';
 

@@ -10,6 +10,15 @@ const stripe = STRIPE_SECRET_KEY ? new Stripe(STRIPE_SECRET_KEY, {
     httpClient: Stripe.createFetchHttpClient(),
 }) : null;
 
+/**
+ * POST /api/payment-intent
+ * 
+ * Creates a Stripe PaymentIntent for the reservation flow.
+ * Calculates the amount (hardcoded to €1.00 for now) and sets up metadata.
+ * 
+ * @param request - Contains the user's email in the JSON body.
+ * @returns JSON response with the clientSecret.
+ */
 export const POST: RequestHandler = async ({ request }) => {
     if (!stripe) {
         console.error('Stripe Secret Key is missing');

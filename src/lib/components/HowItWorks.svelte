@@ -1,4 +1,9 @@
 <script lang="ts">
+	/**
+	 * @component
+	 * Explains the 3-step process of using the product: Connect, Upload, Publish.
+	 * Uses scroll-reveal animations for each step.
+	 */
 	import viewport from '$lib/actions/viewport';
 </script>
 

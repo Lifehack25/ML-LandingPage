@@ -5,8 +5,11 @@ const MAILERLITE_API_URL = 'https://connect.mailerlite.com/api/subscribers';
 
 /**
  * Adds a subscriber to MailerLite and assigns them to a specific group.
- * @param email The email address of the subscriber.
- * @param groupId The ID of the group to assign the subscriber to.
+ * 
+ * @param email - The email address of the subscriber.
+ * @param groupId - The ID of the MailerLite group to assign the subscriber to.
+ * @returns The JSON response from the MailerLite API.
+ * @throws Error if the API token is missing or if the request fails.
  */
 export async function addSubscriber(email: string, groupId: string) {
     if (!MAILERLITE_API_TOKEN) {

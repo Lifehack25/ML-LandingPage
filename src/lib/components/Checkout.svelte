@@ -1,17 +1,30 @@
 <script lang="ts">
+	/**
+	 * @component
+	 * A modal component that handles the Stripe payment flow.
+	 * Mounts Stripe Elements for valid card entry and confirms the payment.
+	 */
 	import { onMount } from 'svelte';
 	import { loadStripe } from '@stripe/stripe-js';
 	import { fade, scale } from 'svelte/transition';
 	import type { Stripe, StripeElements, StripePaymentElement } from '@stripe/stripe-js';
 
 	// Props
+	/**
+	 * @typedef {Object} Props
+	 * @property {string} email - The user's email address, used to initialize the PaymentIntent.
+	 * @property {() => void} onClose - Callback fired when the user closes the modal.
+	 * @property {() => void} onSuccess - Callback fired after successful payment (though usually redirects).
+	 */
+
+	/** @type {Props} */
 	let { email, onClose, onSuccess } = $props<{
 		email: string;
 		onClose: () => void;
 		onSuccess: () => void;
 	}>();
 
-	// State
+	// Reactive State
 	let stripe: Stripe | null = $state(null);
 	let elements: StripeElements | null = $state(null);
 	let paymentElement: StripePaymentElement | null = $state(null);
@@ -19,13 +32,14 @@
 	let isProcessing = $state(false);
 	let errorMessage = $state('');
 
-	// TODO: Replace with your actual Publishable Key or environment variable
-	// e.g., import { PUBLIC_STRIPE_KEY } from '$env/static/public';
+	// Stripe Publishable Key (Safe to expose on client-side)
+	// References the account specific to this project
 	const PUBLIC_STRIPE_KEY =
 		'pk_live_51Rht4kKvwl83EQ5FoOxvIXqKxApaSsbH9yAdAnzdYPSfPI7ENF9qRz3ohYzLA3CXBVoedc0JE4yJ0yQgmSL3kfC700is3wgv6b';
 
 	onMount(async () => {
-		// 1. Load Stripe
+		// 1. Initialize Stripe.js
+		// Asynchronously load the library to not block the main threat
 		stripe = await loadStripe(PUBLIC_STRIPE_KEY);
 
 		if (!stripe) {
@@ -34,7 +48,7 @@
 			return;
 		}
 
-		// 2. Fetch Client Secret
+		// 2. Fetch Client Secret from Backend
 		try {
 			const res = await fetch('/api/payment-intent', {
 				method: 'POST',
@@ -54,17 +68,18 @@
 				throw new Error('Missing payment information from server.');
 			}
 
-			// 3. Create Elements
+			// 3. Mount Stripe Elements
+			// We customize the appearance to seamlessly blend with our UI
 			elements = stripe.elements({
 				clientSecret,
 				appearance: {
 					theme: 'stripe',
 					variables: {
-						colorPrimary: '#0f172a', // Brand Dark
+						colorPrimary: '#0f172a', // Matching Tailwind gray-900 (Brand Dark)
 						colorBackground: '#ffffff',
-						colorText: '#374151',
-						colorDanger: '#ef4444',
-						fontFamily: 'ui-serif, Georgia, Cambria, "Times New Roman", Times, serif', // Matching site serif
+						colorText: '#374151', // gray-700
+						colorDanger: '#ef4444', // red-500
+						fontFamily: 'ui-serif, Georgia, Cambria, "Times New Roman", Times, serif', // Consistent serif usage
 						spacingUnit: '4px',
 						borderRadius: '8px'
 					}
@@ -75,6 +90,8 @@
 			if (paymentElementContainer) {
 				paymentElement = elements.create('payment');
 				paymentElement.mount(paymentElementContainer);
+
+				// Ensure spinner stays until UI is fully ready to prevent layout shift
 				paymentElement.on('ready', () => {
 					isLoading = false;
 				});
@@ -91,10 +108,10 @@
 		isProcessing = true;
 		errorMessage = '';
 
+		// Confirm the payment using Stripe.js
 		const { error } = await stripe.confirmPayment({
 			elements,
 			confirmParams: {
-				// Make sure to change this to your payment completion page
 				return_url: `${window.location.origin}/reserve-complete?email=${encodeURIComponent(email)}`,
 				payment_method_data: {
 					billing_details: {
@@ -104,9 +121,9 @@
 			}
 		});
 
-		// This point will only be reached if there is an immediate error when
-		// confirming the payment. Otherwise, your customer will be redirected to
-		// your `return_url`.
+		// Error Handling:
+		// If execution reaches here, it means the redirection did not happen
+		// usually due to a card error (insufficient funds) or validation error.
 		if (error.type === 'card_error' || error.type === 'validation_error') {
 			errorMessage = error.message || 'An unexpected error occurred.';
 		} else {

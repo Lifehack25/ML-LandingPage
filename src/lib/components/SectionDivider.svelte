@@ -1,10 +1,15 @@
-<script>
+<script lang="ts">
+	/**
+	 * @component
+	 * A creative SVG path animation that draws a "thread" connecting sections.
+	 * The heart icon follows the path as the user scrolls.
+	 */
 	import { onMount } from 'svelte';
 	import viewport from '$lib/actions/viewport';
 
-	let pathElement;
-	let drawPathElement;
-	let iconElement;
+	let pathElement: SVGPathElement;
+	let drawPathElement: SVGPathElement;
+	let iconElement: HTMLDivElement;
 
 	onMount(() => {
 		const updateAnimation = () => {
@@ -38,16 +43,16 @@
 			iconElement.style.transform = `translate(${point.x}px, ${point.y}px) rotate(${angle + 90}deg)`;
 
 			// Draw effect: Update stroke-dashoffset of the drawing path
-			drawPathElement.style.strokeDasharray = pathLength;
-			drawPathElement.style.strokeDashoffset = pathLength * (1 - progress);
+			drawPathElement.style.strokeDasharray = `${pathLength}`;
+			drawPathElement.style.strokeDashoffset = `${pathLength * (1 - progress)}`;
 		};
 
 		window.addEventListener('scroll', updateAnimation);
 		// Initial setup
 		if (pathElement) {
 			const len = pathElement.getTotalLength();
-			drawPathElement.style.strokeDasharray = len;
-			drawPathElement.style.strokeDashoffset = len;
+			drawPathElement.style.strokeDasharray = `${len}`;
+			drawPathElement.style.strokeDashoffset = `${len}`;
 		}
 
 		updateAnimation();

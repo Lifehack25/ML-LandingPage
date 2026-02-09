@@ -11,15 +11,19 @@
 </script>
 
 <svelte:head>
-	<title>Memory Locks - Share your moments with the world</title>
+	<title>Memory Locks - Love locks with a digital media albums.</title>
+	<link rel="canonical" href="https://memorylocks.com/" />
 	<meta
 		name="description"
 		content="A physical lock with a digital soul. Upload your memories, seal them in a lock, and let the world discover your story."
 	/>
+	<meta name="robots" content="index, follow" />
 
 	<!-- Open Graph / Facebook -->
 	<meta property="og:type" content="website" />
-	<meta property="og:title" content="Memory Locks - Share your moments with the world" />
+	<meta property="og:title" content="Memory Locks - Love locks with a digital media albums." />
+	<meta property="og:url" content="https://memorylocks.com/" />
+	<meta property="og:site_name" content="Memory Locks" />
 	<meta
 		property="og:description"
 		content="A physical lock with a digital soul. Upload your memories, seal them in a lock, and let the world discover your story."
@@ -31,7 +35,7 @@
 
 	<!-- Twitter -->
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="Memory Locks - Share your moments with the world" />
+	<meta name="twitter:title" content="Memory Locks - Love locks with a digital media albums." />
 	<meta
 		name="twitter:description"
 		content="A physical lock with a digital soul. Upload your memories, seal them in a lock, and let the world discover your story."

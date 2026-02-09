@@ -1,8 +1,13 @@
 <script lang="ts">
-	export let href: string | undefined = undefined;
+	/**
+	 * @component
+	 * A reusable button component with creative hover effects (shadows, gradients).
+	 * Supports both anchor links (href) and button actions (onClick).
+	 */
+	export let href: string | undefined = undefined; // If provided, renders an <a> tag
 	export let type: 'button' | 'submit' | 'reset' = 'button';
 	export let onClick: ((e: MouseEvent) => void) | undefined = undefined;
-	export let className: string = '';
+	export let className: string = ''; // Additional CSS classes
 	export let disabled: boolean = false;
 
 	function handleClick(e: MouseEvent) {

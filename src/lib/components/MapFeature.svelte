@@ -1,4 +1,9 @@
 <script lang="ts">
+	/**
+	 * @component
+	 * Features a visual representation of locks on a map.
+	 * Highlights the global connectivity aspect of the product.
+	 */
 	import viewport from '$lib/actions/viewport';
 </script>
 

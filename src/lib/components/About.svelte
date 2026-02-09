@@ -1,4 +1,9 @@
 <script>
+	/**
+	 * @component
+	 * Displays the "About" section of the landing page, featuring the "concept" of the product.
+	 * Uses viewport actions to trigger scroll-reveal animations.
+	 */
 	import viewport from '$lib/actions/viewport';
 </script>
 

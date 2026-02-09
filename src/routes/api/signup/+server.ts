@@ -16,6 +16,16 @@ const stripe = STRIPE_SECRET_KEY ? new Stripe(STRIPE_SECRET_KEY, {
     httpClient: Stripe.createFetchHttpClient(), // Important for Edge/Workers
 }) : null;
 
+/**
+ * POST /api/signup
+ * 
+ * Handles user signups for both the standard waitlist and the reservation flow.
+ * - 'standard': Adds user to MailerLite standard group.
+ * - 'reservation': Creates a Stripe Checkout Session for payment.
+ * 
+ * @param request - JSON body containing 'email' and 'type'.
+ * @returns JSON response indicating success/failure or providing a redirect URL.
+ */
 export const POST: RequestHandler = async ({ request, url }) => {
     try {
         const { email, type } = await request.json();

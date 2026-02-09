@@ -1,4 +1,10 @@
 <script lang="ts">
+	/**
+	 * @component
+	 * The Hero section is the first thing users see.
+	 * It contains the main value prop, a signup form for the standard waitlist,
+	 * and a "surprise" interaction with confetti.
+	 */
 	import { onMount } from 'svelte';
 	import { fade, fly } from 'svelte/transition';
 	import CreativeButton from '$lib/components/ui/CreativeButton.svelte';

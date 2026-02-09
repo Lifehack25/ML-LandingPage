@@ -1,4 +1,9 @@
 <script lang="ts">
+	/**
+	 * @component
+	 * The main signup section featuring two tiers: Free and Reservation (€1).
+	 * Handles the reservation flow including triggering the Checkout modal.
+	 */
 	import viewport from '$lib/actions/viewport';
 	import Checkout from './Checkout.svelte';
 	let email = $state('');
@@ -9,8 +14,6 @@
 	let isReservationLoading = $state(false);
 	let reservationError = $state('');
 	let showCheckout = $state(false);
-
-	// Remove local logic, use userState directly in template
 
 	function handleReservationSignup() {
 		if (!reservationEmail) return;
