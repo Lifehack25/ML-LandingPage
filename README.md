@@ -26,7 +26,7 @@
 - **Build**: [Vite](https://vitejs.dev/)
 - **Payments**: [Stripe](https://stripe.com/)
 - **Email**: [MailerLite](https://www.mailerlite.com/)
-- **Hosting**: [Cloudflare Workers](https://workers.cloudflare.com/) 
+- **Hosting**: [Cloudflare Workers](https://workers.cloudflare.com/)
 
 ## 🚀 Getting Started
 
@@ -39,11 +39,13 @@
 ### Installation
 
 1. Install dependencies:
+
    ```bash
    pnpm install
    ```
 
 2. Create a local env file:
+
    ```bash
    touch .env
    ```
@@ -68,6 +70,7 @@ Add these to `.env` for local dev or as production secrets:
 - `MAILERLITE_API_TOKEN=...`
 
 Notes:
+
 - Stripe publishable key is currently hardcoded in `src/lib/components/Checkout.svelte`.
 - The reservation flow depends on `STRIPE_SECRET_KEY` and the MailerLite token for VIP tagging.
 
