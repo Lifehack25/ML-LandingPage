@@ -8,6 +8,8 @@
 
 <img src="https://imagedelivery.net/Fh6D8c3CvE0G8hv20vsbkw/43379da0-d88a-42ea-fec6-7b345c7e2800/thumb" alt="Memory Locks Logo" width="200" />
 
+> **Application is live at: https://memorylocks.com ✨**
+
 **Memory Locks Landing Page** is the marketing site for Memory Locks, featuring the hero experience, waitlist capture, and a reservation flow powered by Stripe. Built with SvelteKit and designed for fast edge delivery on Cloudflare.
 
 ## ✨ Features
