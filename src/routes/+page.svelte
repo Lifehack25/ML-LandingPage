@@ -11,7 +11,7 @@
 </script>
 
 <svelte:head>
-	<title>Memory Locks - Love locks with a digital media albums.</title>
+	<title>Memory Locks – Love Locks with Digital Albums</title>
 	<link rel="canonical" href="https://memorylocks.com/" />
 	<meta
 		name="description"
