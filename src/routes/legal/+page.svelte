@@ -22,7 +22,7 @@
 
 				<div class="prose prose-lg prose-gray max-w-none space-y-6">
 					<p in:fly={{ y: 20, duration: 800, delay: 380 }} class="text-gray-600">
-						<strong>Last updated:</strong> [Insert date]
+						<strong>Last updated:</strong> February 21, 2026
 					</p>
 
 					<div in:fly={{ y: 20, duration: 800, delay: 420 }}>
@@ -177,7 +177,7 @@
 
 				<div class="prose prose-lg prose-gray max-w-none space-y-6">
 					<p in:fly={{ y: 20, duration: 800, delay: 680 }} class="text-gray-600">
-						<strong>Last updated:</strong> [Insert date]
+						<strong>Last updated:</strong> February 21, 2026
 					</p>
 
 					<div in:fly={{ y: 20, duration: 800, delay: 720 }}>
