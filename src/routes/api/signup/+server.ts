@@ -13,9 +13,9 @@ const STANDARD_GROUP_ID = '158904110692697978';
 // Note: We use a lazy initialization or a check to prevent errors at build time if env is missing
 const stripe = STRIPE_SECRET_KEY
 	? new Stripe(STRIPE_SECRET_KEY, {
-			apiVersion: '2025-11-17.clover' as any, // Verify type match
-			httpClient: Stripe.createFetchHttpClient() // Important for Edge/Workers
-		})
+		apiVersion: '2025-11-17.clover' as any, // Verify type match
+		httpClient: Stripe.createFetchHttpClient() // Important for Edge/Workers
+	})
 	: null;
 
 /**
@@ -30,7 +30,7 @@ const stripe = STRIPE_SECRET_KEY
  */
 export const POST: RequestHandler = async ({ request, url }) => {
 	try {
-		const { email, type } = await request.json();
+		const { email, type, turnstileToken } = await request.json();
 
 		if (!email || !type) {
 			return json(
@@ -49,6 +49,49 @@ export const POST: RequestHandler = async ({ request, url }) => {
 		}
 
 		if (type === 'standard') {
+			if (!turnstileToken) {
+				return json(
+					{ success: false, message: 'Turnstile verification is required.' },
+					{ status: 400 }
+				);
+			}
+
+			// Verify Turnstile Token
+			const turnstileSecret = env.TURNSTILE_SECRET_KEY;
+
+			if (!turnstileSecret) {
+				console.error('Turnstile Secret Key is missing');
+				return json(
+					{ success: false, message: 'Server configuration error.' },
+					{ status: 500 }
+				);
+			}
+
+			const turnstileFormData = new FormData();
+			turnstileFormData.append('secret', turnstileSecret);
+			turnstileFormData.append('response', turnstileToken);
+
+			try {
+				const turnstileRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+					method: 'POST',
+					body: turnstileFormData
+				});
+				const turnstileData = await turnstileRes.json();
+				if (!turnstileData.success) {
+					console.error('Turnstile verification failed:', turnstileData);
+					return json(
+						{ success: false, message: 'Security verification failed. Please try again.' },
+						{ status: 403 }
+					);
+				}
+			} catch (err) {
+				console.error('Turnstile API connection error:', err);
+				return json(
+					{ success: false, message: 'Unable to connect to verification service.' },
+					{ status: 502 }
+				);
+			}
+
 			try {
 				// 1. Add to MailerLite Standard Group
 				await addSubscriber(email, STANDARD_GROUP_ID);

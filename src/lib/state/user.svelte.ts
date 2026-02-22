@@ -15,12 +15,17 @@ export class UserState {
 	 *
 	 * @param email - The user's email address.
 	 */
-	async handleStandardSignup(email: string) {
+	async handleStandardSignup(email: string, turnstileToken: string) {
 		this.standardError = '';
 
 		// Immediate feedback for empty input
 		if (!email) {
 			this.standardError = 'Please enter your email.';
+			return;
+		}
+
+		if (!turnstileToken) {
+			this.standardError = 'Please complete the Cloudflare Turnstile verification.';
 			return;
 		}
 
@@ -36,7 +41,7 @@ export class UserState {
 			const response = await fetch('/api/signup', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ email, type: 'standard' })
+				body: JSON.stringify({ email, type: 'standard', turnstileToken })
 			});
 
 			const data = await response.json();

@@ -10,8 +10,10 @@
 	import CreativeButton from '$lib/components/ui/CreativeButton.svelte';
 	import viewport from '$lib/actions/viewport';
 	import { userState } from '$lib/state/user.svelte';
+	import { Turnstile } from 'svelte-turnstile';
 
 	let email = $state('');
+	let turnstileToken = $state('');
 	let showSurprise = $state(false);
 
 	async function triggerSurprise(event: MouseEvent) {
@@ -111,33 +113,42 @@
 				{:else}
 					<form
 						use:viewport
-						class="reveal-on-scroll reveal-delay-400 flex flex-col sm:flex-row gap-4 pt-4 max-w-lg relative"
+						class="reveal-on-scroll reveal-delay-400 flex flex-col gap-4 pt-4 max-w-lg relative"
 						onsubmit={(e) => {
 							e.preventDefault();
-							userState.handleStandardSignup(email);
+							userState.handleStandardSignup(email, turnstileToken);
 						}}
 					>
-						<input
-							type="email"
-							bind:value={email}
-							placeholder="Enter your email address"
-							disabled={userState.isStandardLoading}
-							class="flex-1 px-6 py-4 rounded-full bg-white border border-gray-200 shadow-md focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all font-light text-gray-600 placeholder:text-gray-500 disabled:opacity-60"
+						<div class="flex flex-col sm:flex-row gap-4 w-full">
+							<input
+								type="email"
+								bind:value={email}
+								placeholder="Enter your email address"
+								disabled={userState.isStandardLoading}
+								class="flex-1 px-6 py-4 rounded-full bg-white border border-gray-200 shadow-md focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all font-light text-gray-600 placeholder:text-gray-500 disabled:opacity-60"
+							/>
+							<CreativeButton
+								type="submit"
+								className="px-8 py-4 text-lg font-semibold shadow-xl hover:shadow-2xl hover:shadow-brand-500/30 whitespace-nowrap disabled:opacity-70 disabled:cursor-not-allowed"
+								disabled={userState.isStandardLoading}
+							>
+								{#if userState.isStandardLoading}
+									Joining...
+								{:else}
+									Join Waitlist
+								{/if}
+							</CreativeButton>
+						</div>
+
+						<Turnstile
+							siteKey="0x4AAAAAACghBGr6aGFNBQgv"
+							on:turnstile-callback={(e) => (turnstileToken = e.detail.token)}
 						/>
-						<CreativeButton
-							type="submit"
-							className="px-8 py-4 text-lg font-semibold shadow-xl hover:shadow-2xl hover:shadow-brand-500/30 whitespace-nowrap disabled:opacity-70 disabled:cursor-not-allowed"
-							disabled={userState.isStandardLoading}
-						>
-							{#if userState.isStandardLoading}
-								Joining...
-							{:else}
-								Join Waitlist
-							{/if}
-						</CreativeButton>
 
 						{#if userState.standardError}
-							<div class="absolute -bottom-8 left-6 text-red-500 text-sm">
+							<div
+								class="absolute -bottom-8 left-6 text-red-500 text-sm bg-white/80 px-2 py-1 rounded backdrop-blur-sm z-10"
+							>
 								{userState.standardError}
 							</div>
 						{/if}

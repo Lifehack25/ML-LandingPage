@@ -6,7 +6,10 @@
 	 */
 	import viewport from '$lib/actions/viewport';
 	import Checkout from './Checkout.svelte';
+	import { Turnstile } from 'svelte-turnstile';
+
 	let email = $state('');
+	let turnstileToken = $state('');
 	let reservationEmail = $state('');
 	import { userState } from '$lib/state/user.svelte';
 
@@ -72,7 +75,7 @@
 				class="space-y-4"
 				onsubmit={(e) => {
 					e.preventDefault();
-					userState.handleStandardSignup(email);
+					userState.handleStandardSignup(email, turnstileToken);
 				}}
 			>
 				{#if userState.standardSuccess}
@@ -123,6 +126,12 @@
 						disabled={userState.isStandardLoading}
 						class="w-full px-6 py-4 rounded-xl border border-gray-200 focus:border-brand-500 focus:ring-4 focus:ring-brand-100 outline-none transition-all bg-gray-50 focus:bg-white disabled:opacity-50"
 					/>
+
+					<Turnstile
+						siteKey="0x4AAAAAACghBGr6aGFNBQgv"
+						on:turnstile-callback={(e) => (turnstileToken = e.detail.token)}
+					/>
+
 					{#if userState.standardError}
 						<p class="text-red-500 text-sm ml-2">{userState.standardError}</p>
 					{/if}
