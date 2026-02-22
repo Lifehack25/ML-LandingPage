@@ -13,9 +13,9 @@ const STANDARD_GROUP_ID = '158904110692697978';
 // Note: We use a lazy initialization or a check to prevent errors at build time if env is missing
 const stripe = STRIPE_SECRET_KEY
 	? new Stripe(STRIPE_SECRET_KEY, {
-		apiVersion: '2025-11-17.clover' as any, // Verify type match
-		httpClient: Stripe.createFetchHttpClient() // Important for Edge/Workers
-	})
+			apiVersion: '2025-11-17.clover' as any, // Verify type match
+			httpClient: Stripe.createFetchHttpClient() // Important for Edge/Workers
+		})
 	: null;
 
 /**
@@ -61,10 +61,7 @@ export const POST: RequestHandler = async ({ request, url }) => {
 
 			if (!turnstileSecret) {
 				console.error('Turnstile Secret Key is missing');
-				return json(
-					{ success: false, message: 'Server configuration error.' },
-					{ status: 500 }
-				);
+				return json({ success: false, message: 'Server configuration error.' }, { status: 500 });
 			}
 
 			const turnstileFormData = new FormData();
@@ -72,10 +69,13 @@ export const POST: RequestHandler = async ({ request, url }) => {
 			turnstileFormData.append('response', turnstileToken);
 
 			try {
-				const turnstileRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-					method: 'POST',
-					body: turnstileFormData
-				});
+				const turnstileRes = await fetch(
+					'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+					{
+						method: 'POST',
+						body: turnstileFormData
+					}
+				);
 				const turnstileData = await turnstileRes.json();
 				if (!turnstileData.success) {
 					console.error('Turnstile verification failed:', turnstileData);
