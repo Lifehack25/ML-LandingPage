@@ -13,9 +13,9 @@ const STANDARD_GROUP_ID = '158904110692697978';
 // Note: We use a lazy initialization or a check to prevent errors at build time if env is missing
 const stripe = STRIPE_SECRET_KEY
 	? new Stripe(STRIPE_SECRET_KEY, {
-			apiVersion: '2025-11-17.clover' as any, // Verify type match
-			httpClient: Stripe.createFetchHttpClient() // Important for Edge/Workers
-		})
+		apiVersion: '2025-11-17.clover' as any, // Verify type match
+		httpClient: Stripe.createFetchHttpClient() // Important for Edge/Workers
+	})
 	: null;
 
 /**

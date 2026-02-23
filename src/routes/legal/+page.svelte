@@ -340,11 +340,21 @@
 
 					<div in:fly={{ y: 20, duration: 800, delay: 1040 }}>
 						<h3 class="text-xl font-semibold text-gray-900 mb-2">9. Deletion</h3>
+						<p class="text-gray-600 mb-3">
+							You can delete your media or your account directly through the app. For security and
+							verification reasons, please do not contact us to request data deletion. You must
+							initiate deletion from within your account in the app.
+						</p>
+						<p class="text-gray-600 mb-3">
+							Deletion removes the content from public view and deletes it from our active systems.
+							Limited residual copies may persist temporarily in backups or logs for security and
+							operational purposes.
+						</p>
 						<p class="text-gray-600">
-							You can delete your media or your account through the app. Deletion removes the
-							content from public view and deletes it from our active systems. Limited residual
-							copies may persist temporarily in backups or logs for security and operational
-							purposes.
+							For step-by-step instructions, please see our <a
+								href="/delete-data"
+								class="text-brand-600 hover:text-brand-700 underline">Data Deletion Guide</a
+							>.
 						</p>
 					</div>
 

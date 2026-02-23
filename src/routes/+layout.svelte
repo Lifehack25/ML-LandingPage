@@ -20,13 +20,13 @@
 	<div
 		class="grid-stack"
 		in:fly={{
-			x: $page.url.pathname === '/legal' ? 1000 : -1000,
+			x: $page.url.pathname === '/legal' || $page.url.pathname === '/delete-data' ? 1000 : -1000,
 			duration: 600,
 			easing: cubicOut,
 			opacity: 0
 		}}
 		out:fly={{
-			x: $page.url.pathname === '/legal' ? -1000 : 1000,
+			x: $page.url.pathname === '/legal' || $page.url.pathname === '/delete-data' ? -1000 : 1000,
 			duration: 600,
 			easing: cubicOut,
 			opacity: 0
