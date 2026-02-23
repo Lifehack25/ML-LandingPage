@@ -8,7 +8,9 @@
 	import { page } from '$app/stores';
 	import CreativeButton from '$lib/components/ui/CreativeButton.svelte';
 
-	let isLegalPage = $derived($page.url.pathname === '/legal');
+	let isLegalPage = $derived(
+		$page.url.pathname === '/legal' || $page.url.pathname === '/delete-data'
+	);
 </script>
 
 <header

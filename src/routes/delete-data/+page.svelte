@@ -34,7 +34,7 @@
 						app.
 					</p>
 
-					<hr class="my-8 border-gray-200" in:fly={{ y: 20, duration: 800, delay: 400 }} />
+					<hr class="my-8 border-brand-200" in:fly={{ y: 20, duration: 800, delay: 400 }} />
 
 					<div in:fly={{ y: 20, duration: 800, delay: 420 }}>
 						<h3 class="text-2xl font-semibold text-gray-900 mb-4">
@@ -56,12 +56,10 @@
 						</p>
 					</div>
 
-					<hr class="my-8 border-gray-200" in:fly={{ y: 20, duration: 800, delay: 440 }} />
+					<hr class="my-8 border-brand-200" in:fly={{ y: 20, duration: 800, delay: 440 }} />
 
 					<div in:fly={{ y: 20, duration: 800, delay: 460 }}>
-						<h3 class="text-2xl font-semibold text-gray-900 mb-4">
-							2. Permanently Delete Your Account
-						</h3>
+						<h3 class="text-2xl font-semibold text-gray-900 mb-4">2. Delete Your Account</h3>
 						<p class="text-gray-600 mb-4">
 							Deleting your account removes your personal data and associated Memory Locks content.
 						</p>
@@ -85,7 +83,7 @@
 						</ul>
 					</div>
 
-					<hr class="my-8 border-gray-200" in:fly={{ y: 20, duration: 800, delay: 480 }} />
+					<hr class="my-8 border-brand-200" in:fly={{ y: 20, duration: 800, delay: 480 }} />
 
 					<div in:fly={{ y: 20, duration: 800, delay: 500 }}>
 						<h3 class="text-2xl font-semibold text-gray-900 mb-4">
