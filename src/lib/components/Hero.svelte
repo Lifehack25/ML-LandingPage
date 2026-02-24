@@ -155,7 +155,7 @@
 					</form>
 				{/if}
 
-				<div class="mt-4 h-6">
+				<div class="-mt-4 h-6 relative z-20">
 					{#if showSurprise}
 						<p
 							in:fly={{ y: 20, duration: 800 }}
