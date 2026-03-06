@@ -180,7 +180,7 @@
 					class="absolute inset-0 bg-brand-300 rounded-full blur-[100px] opacity-20 -z-10 transform translate-x-10 translate-y-10"
 				></div>
 				<img
-					src="https://imagedelivery.net/Fh6D8c3CvE0G8hv20vsbkw/64e3210e-2be0-43c9-a89e-21c6ca007900/standard"
+					src="https://imagedelivery.net/Fh6D8c3CvE0G8hv20vsbkw/11b8267b-71a4-48f4-774a-70e2d5cd1500/standard"
 					alt="Memory Lock Product"
 					class="w-full h-full object-contain drop-shadow-2xl"
 				/>
