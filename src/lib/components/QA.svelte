@@ -13,7 +13,7 @@
 			question: 'What is a Memory Lock?',
 			isOpen: false,
 			answer:
-				'A Memory Lock is a unique padlock featuring a laser-engraved QR code. When scanned, it opens a public digital album containing both images and videos, where your most cherished memories are permanently stored for the world to see.',
+				'A Memory Lock is a unique padlock featuring a laser-engraved QR code. When scanned, it opens a public digital album containing both images and videos, where the lock\'s owner most cherished memories are stored for the world to discover.',
 			type: 'text'
 		},
 		{
