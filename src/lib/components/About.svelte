@@ -47,7 +47,7 @@
 					</p>
 					<p use:viewport class="reveal-on-scroll reveal-delay-400">
 						The moments you seal will stay safe for at least 50 years, unless you choose to let them
-						go. Revisit your lock years from when you sealed it, and relive the memories you thought
+						go. Revisit your lock years from when you sealed it, and relive the memories you perhaps thought
 						were lost.
 					</p>
 				</div>
