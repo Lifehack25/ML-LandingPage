@@ -3,6 +3,12 @@
 	import Footer from '$lib/components/Footer.svelte';
 	import CreativeButton from '$lib/components/ui/CreativeButton.svelte';
 	import { fly } from 'svelte/transition';
+	import { onMount } from 'svelte';
+
+	let mounted = $state(false);
+	onMount(() => {
+		mounted = true;
+	});
 </script>
 
 <div
@@ -10,6 +16,7 @@
 >
 	<Header />
 	<main class="pt-32 pb-24 px-4 sm:px-6 lg:px-8">
+		{#key mounted}
 		<div class="max-w-3xl mx-auto space-y-16">
 			<!-- Terms of Service -->
 			<section>
@@ -407,6 +414,7 @@
 				</CreativeButton>
 			</div>
 		</div>
+		{/key}
 	</main>
 	<Footer />
 </div>
